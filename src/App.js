@@ -1,15 +1,16 @@
 import React from 'react';
-import InputField from './InputField';
-import Sumar from './Sumar';
-import Multiplicar from './Multiplicar';
+import InputField from './Components/InputField';
+import Sumar from './Components/Sumar';
+import Multiplicar from './Components/Multiplicar';
+import Revision from './Components/Revision';
 
 function App() {
-  const placeholder = 'v=d/t';
   const [equation, setEquation] = React.useState('v=d/t');
-  let currentEquation = '' ? placeholder : equation;
+  const [currentEquation, setCurrentEquation] = React.useState('v=d/t');
 
   function changeState(currentEquation) {
     setEquation(currentEquation);
+    // console.log(equation);
   }
 
   const onSubmitTask = (e) => {
@@ -18,7 +19,7 @@ function App() {
   };
 
   const handleChange = (e) => {
-    currentEquation = e.target.value;
+    setCurrentEquation(e.target.value);
   };
 
   return (
@@ -38,6 +39,7 @@ function App() {
         handleClick={changeState}
         equation={equation}
       />
+      <Revision equation={equation} />
     </div>
   );
 }

@@ -3,24 +3,30 @@ import Equation from './despejes';
 
 export default function Multiplicar(props) {
   const { equation, name, handleClick } = props;
+  const [operation, setOperation] = React.useState('');
   const currentEquation = new Equation(equation);
 
-  let operation;
   const updateEquation = (e) => {
     e.preventDefault();
-    alert(operation);
     currentEquation.setEquation();
     currentEquation.mult(operation);
-    handleClick(currentEquation.eq);
+    operation === undefined || ''
+      ? alert('Invalid Input')
+      : handleClick(currentEquation.eq);
+    setOperation('');
   };
 
-  const handleChange = (e) => {
-    operation = e.target.value;
-  };
+  // const handleChange = (e) => {
+  //   setOperation(e.target.value);
+  // };
 
   return (
     <form onSubmit={updateEquation}>
-      <input type='text' onChange={handleChange}></input>
+      <input
+        type='text'
+        onChange={(e) => setOperation(e.target.value)}
+        value={operation}
+      ></input>
       <button type='submit'>{name}</button>
     </form>
   );
