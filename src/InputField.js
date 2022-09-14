@@ -3,18 +3,17 @@ import Equation from './despejes';
 import 'katex/dist/katex.min.css';
 import { BlockMath } from 'react-katex';
 
-export default function InputField(props) {
-  const { name, equation } = props;
+//Este componente se encarga de procesar la ecuación escrita y presentarla
+// en la pantalla
 
+export default function InputField(props) {
+  const { equation } = props;
   const currentEquation = new Equation(equation);
-  const functionResult = currentEquation.setEquation();
-  const functionOutput = currentEquation.eq;
-  const functionLatex = currentEquation.Latex;
+  currentEquation.setEquation();
+
   return (
     <div>
-      {/* <input type='text'></input>
-      <button>{name}</button> */}
-      <BlockMath math={functionLatex} />
+      <BlockMath math={currentEquation.Latex} />
     </div>
   );
 }

@@ -1,24 +1,43 @@
 import React from 'react';
 import InputField from './InputField';
+import Sumar from './Sumar';
+import Multiplicar from './Multiplicar';
 
 function App() {
+  const placeholder = 'v=d/t';
   const [equation, setEquation] = React.useState('v=d/t');
-  let currentEquation;
-  const handleChange = (event) => {
-    currentEquation = event.target.value;
-  };
+  let currentEquation = '' ? placeholder : equation;
 
-  function changeCurrentEquation() {
+  function changeState(currentEquation) {
     setEquation(currentEquation);
   }
+
+  const onSubmitTask = (e) => {
+    e.preventDefault();
+    changeState(currentEquation);
+  };
+
+  const handleChange = (e) => {
+    currentEquation = e.target.value;
+  };
 
   return (
     <div className='App'>
       <h2>Modo Desarrollo</h2>
       <p>Aca se introduce la ecuacion que se quiere manipular</p>
-      <input type='text' placeholder='v=d/t' onChange={handleChange}></input>
-      <button onClick={changeCurrentEquation}>Add Equation</button>
-      <InputField name={'Sum'} equation={equation} />
+
+      <form onSubmit={onSubmitTask}>
+        <input type='text' placeholder='v=d/t' onChange={handleChange}></input>
+        <button type='submit'>Add Equation </button>
+      </form>
+
+      <InputField equation={equation} />
+      <Sumar name={'Sumar'} handleClick={changeState} equation={equation} />
+      <Multiplicar
+        name={'Multiplicar'}
+        handleClick={changeState}
+        equation={equation}
+      />
     </div>
   );
 }
