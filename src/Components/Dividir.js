@@ -9,8 +9,9 @@ export default function Dividir(props) {
   const updateEquation = (e) => {
     e.preventDefault();
     currentEquation.setEquation();
-    const correctedOperation = `(${operation})^-1`;
-    currentEquation.div(correctedOperation);
+    const correctedOperation = `((${operation})^-1)`;
+    currentEquation.mult(correctedOperation);
+    console.log(correctedOperation);
     handleClick(currentEquation.eq);
     setOperation('');
   };
