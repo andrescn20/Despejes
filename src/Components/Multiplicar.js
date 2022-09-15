@@ -10,19 +10,17 @@ export default function Multiplicar(props) {
     e.preventDefault();
     currentEquation.setEquation();
     currentEquation.mult(operation);
-    operation === undefined || ''
-      ? alert('Invalid Input')
-      : handleClick(currentEquation.eq);
+    handleClick(currentEquation.eq);
     setOperation('');
+  };
+
+  const handleChange = (e) => {
+    setOperation(e.target.value);
   };
 
   return (
     <form onSubmit={updateEquation}>
-      <input
-        type='text'
-        onChange={(e) => setOperation(e.target.value)}
-        value={operation}
-      ></input>
+      <input type='text' onChange={handleChange} value={operation}></input>
       <button type='submit'>{name}</button>
     </form>
   );

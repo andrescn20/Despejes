@@ -3,6 +3,7 @@ import InputField from './Components/InputField';
 import Sumar from './Components/Sumar';
 import Multiplicar from './Components/Multiplicar';
 import Revision from './Components/Revision';
+import Dividir from './Components/Dividir';
 
 function App() {
   const [equation, setEquation] = React.useState('v=d/t');
@@ -57,7 +58,6 @@ function App() {
           type='text'
           placeholder='t'
           onChange={handleVariableChange}
-          // value={variable}
         ></input>
         <button type='submit'>Elegir variable </button>
       </form>
@@ -71,12 +71,20 @@ function App() {
         handleClick={changeEquationState}
         equation={equation}
       />
+
       <Multiplicar
         name={'Multiplicar'}
-        handleClick={changeVariableState}
+        handleClick={changeEquationState}
+        equation={equation}
+      />
+
+      <Dividir
+        name={'Dividir'}
+        handleClick={changeEquationState}
         equation={equation}
       />
       <p>Solución Final:</p>
+
       <Revision equation={equation} variable={variable} />
     </div>
   );
