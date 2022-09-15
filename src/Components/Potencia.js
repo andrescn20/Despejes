@@ -1,7 +1,7 @@
 import React from 'react';
 import Equation from './despejes';
 
-export default function Multiplicar(props) {
+export default function Potencia(props) {
   const { equation, name, handleClick } = props;
   const [operation, setOperation] = React.useState('');
   const currentEquation = new Equation(equation);
@@ -10,7 +10,7 @@ export default function Multiplicar(props) {
     console.log(operation);
     e.preventDefault();
     currentEquation.setEquation();
-    currentEquation.mult(operation);
+    currentEquation.power(operation);
     handleClick(currentEquation.eq);
     setOperation('');
   };
@@ -22,7 +22,7 @@ export default function Multiplicar(props) {
   return (
     <form onSubmit={updateEquation}>
       <input type='text' onChange={handleChange} value={operation}></input>
-      <button type='submit'> {name}</button>
+      <button type='submit'>{name}</button>
     </form>
   );
 }

@@ -11,7 +11,6 @@ export default function Dividir(props) {
     currentEquation.setEquation();
     const correctedOperation = `((${operation})^-1)`;
     currentEquation.mult(correctedOperation);
-    console.log(correctedOperation);
     handleClick(currentEquation.eq);
     setOperation('');
   };
@@ -27,5 +26,3 @@ export default function Dividir(props) {
     </form>
   );
 }
-
-//Prueba random de que tengo acceso al repo

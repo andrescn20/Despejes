@@ -4,6 +4,7 @@ import Sumar from './Components/Sumar';
 import Multiplicar from './Components/Multiplicar';
 import Revision from './Components/Revision';
 import Dividir from './Components/Dividir';
+import Potencia from './Components/Potencia';
 
 function App() {
   const [equation, setEquation] = React.useState('v=d/t');
@@ -40,7 +41,7 @@ function App() {
   return (
     <div className='App'>
       <h2>Modo Desarrollo</h2>
-      <p>Introduzca la ecuacion a manipular</p>
+      <p>Introduzca la ecuación a manipular</p>
       <form onSubmit={submitEquation}>
         <input
           type='text'
@@ -52,7 +53,7 @@ function App() {
 
       <InputField equation={equation} />
 
-      <p>Elija la variable para la que desea despejar</p>
+      <p>Elija la variable para la cuál desea despejar</p>
       <form onSubmit={submitVariable}>
         <input
           type='text'
@@ -83,36 +84,17 @@ function App() {
         handleClick={changeEquationState}
         equation={equation}
       />
+
+      <Potencia
+        name={'Potencia'}
+        handleClick={changeEquationState}
+        equation={equation}
+      />
       <p>Solución Final:</p>
 
       <Revision equation={equation} variable={variable} />
     </div>
   );
 }
-
-// const equation = new Equation('d=v*t');
-// equation.setEquation();
-// console.log(equation.eq);
-// //Despejar v
-// equation.div('t');
-// console.log(equation.eq);
-// //Despejar t
-// equation.mult('t');
-// equation.div('v');
-// console.log(equation.eq);
-// //Eleva al cuadrado
-// equation.square();
-// console.log(equation.eq);
-// //Saca raíz
-// equation.root();
-// console.log(equation.eq);
-// //Simplifica
-// equation.simplify();
-// console.log(equation.eq);
-// //Saca raíz de nuevo
-// equation.root();
-// console.log(equation.eq);
-// //Imprime el latex
-// console.log(equation.Latex);
 
 export default App;

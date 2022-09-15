@@ -5,18 +5,33 @@ import { BlockMath } from 'react-katex';
 
 export default function Revision(props) {
   const { equation, variable } = props;
+
   const currentEquation = new Equation(equation);
   const [solutionStatus, setSolutionStatus] = React.useState('');
 
   currentEquation.setEquation();
+
   const solution = nerdamer(`solve(${equation}, ${variable})`);
   const cleanSolution = solution.toString().replace(/\[|\]/g, '');
-  const latexSolution = nerdamer.convertToLaTeX(`${cleanSolution}`);
+
+  const finalSolution = new Equation(cleanSolution);
+  finalSolution.setEquation();
+
+  const latexSolution = nerdamer.convertToLaTeX(`${finalSolution.eq}`);
+
+  const latexLeft = nerdamer.convertToLaTeX(`${currentEquation.eqLeft}`);
+  const latexRight = nerdamer.convertToLaTeX(`${currentEquation.eqRight}`);
 
   function revisar() {
+    // console.log(currentEquation.eq);
+    // console.log(currentEquation.eqLeft);
+    // console.log(currentEquation.eqRight);
+    // console.log(finalSolution.eq);
+    // console.log(cleanSolution);
+
     if (
-      currentEquation.eqLeft === cleanSolution ||
-      currentEquation.eqRight === cleanSolution
+      latexLeft.eqLeft === latexSolution ||
+      latexRight.eqRight === latexSolution
     ) {
       setSolutionStatus('Variable despejada con exito');
     } else {
