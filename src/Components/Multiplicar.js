@@ -16,10 +16,6 @@ export default function Multiplicar(props) {
     setOperation('');
   };
 
-  // const handleChange = (e) => {
-  //   setOperation(e.target.value);
-  // };
-
   return (
     <form onSubmit={updateEquation}>
       <input

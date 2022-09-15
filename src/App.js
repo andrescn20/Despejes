@@ -7,39 +7,77 @@ import Revision from './Components/Revision';
 function App() {
   const [equation, setEquation] = React.useState('v=d/t');
   const [currentEquation, setCurrentEquation] = React.useState('v=d/t');
+  const [variable, setVariable] = React.useState('t');
+  const [currentVariable, setcurrentVariable] = React.useState('t');
 
-  function changeState(currentEquation) {
+  function changeEquationState(currentEquation) {
     setEquation(currentEquation);
-    // console.log(equation);
   }
 
-  const onSubmitTask = (e) => {
+  function changeVariableState(currentVariable) {
+    setVariable(currentVariable);
+  }
+
+  const submitEquation = (e) => {
     e.preventDefault();
-    changeState(currentEquation);
+    changeEquationState(currentEquation);
   };
 
-  const handleChange = (e) => {
+  const submitVariable = (e) => {
+    e.preventDefault();
+    changeVariableState(currentVariable);
+  };
+
+  const handleEquationChange = (e) => {
     setCurrentEquation(e.target.value);
+  };
+
+  const handleVariableChange = (e) => {
+    setcurrentVariable(e.target.value);
   };
 
   return (
     <div className='App'>
       <h2>Modo Desarrollo</h2>
-      <p>Aca se introduce la ecuacion que se quiere manipular</p>
-
-      <form onSubmit={onSubmitTask}>
-        <input type='text' placeholder='v=d/t' onChange={handleChange}></input>
-        <button type='submit'>Add Equation </button>
+      <p>Introduzca la ecuacion a manipular</p>
+      <form onSubmit={submitEquation}>
+        <input
+          type='text'
+          placeholder='v=d/t'
+          onChange={handleEquationChange}
+        ></input>
+        <button type='submit'>Añadir Ecuación </button>
       </form>
 
       <InputField equation={equation} />
-      <Sumar name={'Sumar'} handleClick={changeState} equation={equation} />
-      <Multiplicar
-        name={'Multiplicar'}
-        handleClick={changeState}
+
+      <p>Elija la variable para la que desea despejar</p>
+      <form onSubmit={submitVariable}>
+        <input
+          type='text'
+          placeholder='t'
+          onChange={handleVariableChange}
+          // value={variable}
+        ></input>
+        <button type='submit'>Elegir variable </button>
+      </form>
+      <p>
+        {' '}
+        A continuación, se le presentan las operaciones que puede utilizar.
+        Escriba la variable/número que la operación va a utilizar.{' '}
+      </p>
+      <Sumar
+        name={'Sumar'}
+        handleClick={changeEquationState}
         equation={equation}
       />
-      <Revision equation={equation} />
+      <Multiplicar
+        name={'Multiplicar'}
+        handleClick={changeVariableState}
+        equation={equation}
+      />
+      <p>Solución Final:</p>
+      <Revision equation={equation} variable={variable} />
     </div>
   );
 }

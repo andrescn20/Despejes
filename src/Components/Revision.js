@@ -1,11 +1,17 @@
 // import { useState } from 'react';
 import Equation from './despejes';
+import nerdamer from 'nerdamer/all.min';
+import { BlockMath } from 'react-katex';
 
 export default function Revision(props) {
-  const { equation } = props;
+  const { equation, variable } = props;
   const currentEquation = new Equation(equation);
-  // const [inputText, setInputText] = useState('');
 
   currentEquation.setEquation();
-  return;
+  const solution = nerdamer(`solve(${equation}, ${variable})`);
+  const cleanSolution = solution.toString().replace(/\[|\]/g, '');
+  const latexSolution = nerdamer.convertToLaTeX(`${cleanSolution}`);
+  console.log(cleanSolution);
+
+  return <BlockMath math={`${variable}=${latexSolution}`} />;
 }
