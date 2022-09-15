@@ -3,7 +3,7 @@ import Equation from './despejes';
 
 export default function Sumar(props) {
   const { equation, name, handleClick } = props;
-  const [operation, setOperation] = React.useState();
+  const [operation, setOperation] = React.useState('');
   const currentEquation = new Equation(equation);
 
   const updateEquation = (e) => {
