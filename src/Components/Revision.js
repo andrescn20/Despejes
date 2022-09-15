@@ -7,6 +7,7 @@ export default function Revision(props) {
   const { equation, variable } = props;
 
   const currentEquation = new Equation(equation);
+
   const [solutionStatus, setSolutionStatus] = React.useState('');
 
   currentEquation.setEquation();
@@ -14,25 +15,13 @@ export default function Revision(props) {
   const solution = nerdamer(`solve(${equation}, ${variable})`);
   const cleanSolution = solution.toString().replace(/\[|\]/g, '');
 
-  const finalSolution = new Equation(cleanSolution);
-  finalSolution.setEquation();
+  const latexSolution = nerdamer.convertToLaTeX(`${cleanSolution}`);
 
-  const latexSolution = nerdamer.convertToLaTeX(`${finalSolution.eq}`);
-
-  const latexLeft = nerdamer.convertToLaTeX(`${currentEquation.eqLeft}`);
-  const latexRight = nerdamer.convertToLaTeX(`${currentEquation.eqRight}`);
+  const eqLeft = nerdamer(currentEquation.eqLeft).text('fractions');
+  const eqRight = nerdamer(currentEquation.eqRight).text('fractions');
 
   function revisar() {
-    // console.log(currentEquation.eq);
-    // console.log(currentEquation.eqLeft);
-    // console.log(currentEquation.eqRight);
-    // console.log(finalSolution.eq);
-    // console.log(cleanSolution);
-
-    if (
-      latexLeft.eqLeft === latexSolution ||
-      latexRight.eqRight === latexSolution
-    ) {
+    if (eqLeft === cleanSolution || eqRight === cleanSolution) {
       setSolutionStatus('Variable despejada con exito');
     } else {
       setSolutionStatus('Variable pendiente de despejar');
