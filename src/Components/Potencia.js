@@ -7,7 +7,6 @@ export default function Potencia(props) {
   const currentEquation = new Equation(equation);
 
   const updateEquation = (e) => {
-    console.log(operation);
     e.preventDefault();
     currentEquation.setEquation();
     currentEquation.power(operation);
