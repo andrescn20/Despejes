@@ -5,6 +5,7 @@ import Multiplicar from './Components/Multiplicar';
 import Revision from './Components/Revision';
 import Dividir from './Components/Dividir';
 import Potencia from './Components/Potencia';
+import Factores from './Components/Factores';
 
 function App() {
   const [equation, setEquation] = React.useState('v=d/t');
@@ -53,20 +54,6 @@ function App() {
 
       <InputField equation={equation} />
 
-      <p>Elija la variable para la cuál desea despejar</p>
-      <form onSubmit={submitVariable}>
-        <input
-          type='text'
-          placeholder='t'
-          onChange={handleVariableChange}
-        ></input>
-        <button type='submit'>Elegir variable </button>
-      </form>
-      <p>
-        {' '}
-        A continuación, se le presentan las operaciones que puede utilizar.
-        Escriba la variable/número que la operación va a utilizar.{' '}
-      </p>
       <Sumar
         name={'Sumar'}
         handleClick={changeEquationState}
@@ -90,7 +77,22 @@ function App() {
         handleClick={changeEquationState}
         equation={equation}
       />
-      <p>Solución Final:</p>
+      <Factores equation={equation} />
+      <p>Revisión:</p>
+      <p>Elija la variable para la cuál desea despejar</p>
+      <form onSubmit={submitVariable}>
+        <input
+          type='text'
+          placeholder='t'
+          onChange={handleVariableChange}
+        ></input>
+        <button type='submit'>Elegir variable </button>
+      </form>
+      <p>
+        {' '}
+        A continuación, se le presentan las operaciones que puede utilizar.
+        Escriba la variable/número que la operación va a utilizar.{' '}
+      </p>
 
       <Revision equation={equation} variable={variable} />
     </div>
