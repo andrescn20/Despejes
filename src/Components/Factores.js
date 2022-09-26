@@ -1,48 +1,42 @@
+// import { remove } from 'lodash';
 import React from 'react';
-import { flattenDeep } from 'lodash';
+// import { flattenDeep } from 'lodash';
 import Botones from './Botones';
+// import Equation from './despejes';
 // import nerdamer from 'nerdamer/all.min';
 // import { InlineMath } from 'react-katex';
 
 export default function Factores(props) {
   const { equation } = props;
-  const [equationParts, setEquationParts] = React.useState([]);
-  const [firstCleanLength, setFirstCleanLength] = React.useState(0);
+  const [equationFactors, setEquationFactors] = React.useState([]);
 
-  //   const currentEquation = new Equation(equation);
+  const removeParenthesis = (array) => {
+    //Funcion para remover parentesis cuando sea necesario
+    return array.replace(/\(|\)/g, '');
+  };
 
   function equationSeparator() {
-    let sumArray = equation.replace('=', '+').split('+');
-    console.log(sumArray);
-    setFirstCleanLength(sumArray.length);
+    //Funcion principal que separa los distintos factores
+    let cleanEquation = equation.replace('=', '+'); //Cambia el igual por una suma.
+    let monomios = removeParenthesis(cleanEquation).split(/\+|-/); //Remueve parentesis y luego separa en monomios
 
-    // console.log(sumArray);
-    let minusArray;
+    let flatMultiplication = cleanEquation.replace(/\)\(/g, '*'); //Homogeniza la notacion p[ara multiplicacion
+    let factors = removeParenthesis(flatMultiplication).split(/\+|\*|\/|-/); //Remueve parentesis y luego separa todos los factores correspondientes
 
-    sumArray.forEach((element) => {
-      minusArray = [element.split('-')];
-      sumArray = [...sumArray, minusArray];
-    });
+    let allFactors = monomios.concat(factors); //Unificacion de todos los factores generados
 
-    const initialFactors = flattenDeep(sumArray);
+    let finalFactors = [...new Set(allFactors)]; //Elimina los monomios repetidos
 
-    const monomios = initialFactors.slice(
-      firstCleanLength,
-      initialFactors.length
-    );
-
-    setEquationParts(monomios);
-    console.log(equationParts);
-    // console.log(equationParts);
-    // setEquationParts(initialFactors);
+    setEquationFactors(finalFactors); //Modifica el estado definido
   }
-  // vamos a guardar el largo del array suma en un estado, para luego usarlo de modo que nos permita restar los factores que quedan repetidos
+
   return (
     <div>
       <button onClick={equationSeparator}>Separate</button>
 
-      <p>Partes: {equationParts.toString()}</p>
-      <Botones factores={equationParts} />
+      <Botones factores={equationFactors} />
     </div>
   );
 }
+
+// x = v*t + (1/2)*g*(t^2)
