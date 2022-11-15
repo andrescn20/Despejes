@@ -109,7 +109,7 @@ function App() {
         <form onSubmit={submitVariable}>
           <input
             type='text'
-            placeholder='t'
+            placeholder='a'
             onChange={handleVariableChange}
           ></input>
           <button type='submit'>Elegir variable </button>
