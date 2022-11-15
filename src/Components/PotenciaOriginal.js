@@ -1,7 +1,7 @@
 import React from 'react';
 import Equation from './despejes';
 
-export default function Sumar(props) {
+export default function Potencia(props) {
   const { equation, name, handleClick } = props;
   const [operation, setOperation] = React.useState('');
   const currentEquation = new Equation(equation);
@@ -9,8 +9,9 @@ export default function Sumar(props) {
   const updateEquation = (e) => {
     e.preventDefault();
     currentEquation.setEquation();
-    currentEquation.suma(operation);
+    currentEquation.power(operation);
     handleClick(currentEquation.eq);
+    setOperation('');
   };
 
   const handleChange = (e) => {
