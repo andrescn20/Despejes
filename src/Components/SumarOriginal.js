@@ -11,6 +11,7 @@ export default function Sumar(props) {
     currentEquation.setEquation();
     currentEquation.suma(operation);
     handleClick(currentEquation.eq);
+    setOperation('');
   };
 
   const handleChange = (e) => {

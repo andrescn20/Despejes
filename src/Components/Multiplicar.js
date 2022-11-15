@@ -2,8 +2,9 @@ import React from 'react';
 import Equation from './despejes';
 
 export default function Multiplicar(props) {
-  const { equation, name, handleClick } = props;
-  const [operation, setOperation] = React.useState('');
+  const { equation, name, handleClick, operation, updateHistory, history } =
+    props;
+
   const currentEquation = new Equation(equation);
 
   const updateEquation = (e) => {
@@ -11,16 +12,17 @@ export default function Multiplicar(props) {
     currentEquation.setEquation();
     currentEquation.mult(operation);
     handleClick(currentEquation.eq);
-    setOperation('');
+    // addEquationToHistory(currentEquation.eq);
   };
 
-  const handleChange = (e) => {
-    setOperation(e.target.value);
-  };
+  function addEquationToHistory(newElement) {
+    let newHistory = history.concat(newElement);
+    updateHistory(newHistory);
+    console.log(history);
+  }
 
   return (
     <form onSubmit={updateEquation}>
-      <input type='text' onChange={handleChange} value={operation}></input>
       <button type='submit'> {name}</button>
     </form>
   );

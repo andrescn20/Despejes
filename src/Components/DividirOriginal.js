@@ -2,9 +2,8 @@ import React from 'react';
 import Equation from './despejes';
 
 export default function Dividir(props) {
-  const { equation, name, handleClick, operation, updateHistory, history } =
-    props;
-
+  const { equation, name, handleClick } = props;
+  const [operation, setOperation] = React.useState('');
   const currentEquation = new Equation(equation);
 
   const updateEquation = (e) => {
@@ -13,17 +12,16 @@ export default function Dividir(props) {
     const correctedOperation = `((${operation})^-1)`;
     currentEquation.mult(correctedOperation);
     handleClick(currentEquation.eq);
-    // addEquationToHistory(currentEquation.eq);
+    setOperation('');
   };
 
-  function addEquationToHistory(newElement) {
-    let newHistory = history.concat(newElement);
-    updateHistory(newHistory);
-    console.log(history);
-  }
+  const handleChange = (e) => {
+    setOperation(e.target.value);
+  };
 
   return (
     <form onSubmit={updateEquation}>
+      <input type='text' onChange={handleChange} value={operation}></input>
       <button type='submit'>{name}</button>
     </form>
   );

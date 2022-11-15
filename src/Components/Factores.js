@@ -1,14 +1,13 @@
-// import { remove } from 'lodash';
 import React from 'react';
-// import { flattenDeep } from 'lodash';
 import Botones from './Botones';
-// import Equation from './despejes';
-// import nerdamer from 'nerdamer/all.min';
-// import { InlineMath } from 'react-katex';
 
 export default function Factores(props) {
-  const { equation } = props;
+  const { equation, setOperation } = props;
   const [equationFactors, setEquationFactors] = React.useState([]);
+
+  const sendCurrentOperation = (currentOperation) => {
+    setOperation(currentOperation);
+  };
 
   const removeParenthesis = (array) => {
     //Funcion para remover parentesis cuando sea necesario
@@ -17,12 +16,10 @@ export default function Factores(props) {
 
   function equationSeparator() {
     //Funcion principal que separa los distintos factores
-    let cleanEquation = equation.replace('=', '+'); //Cambia el igual por una suma.
-    let monomios = removeParenthesis(cleanEquation).split(/\+|-/); //Remueve parentesis y luego separa en monomios
+    let monomios = removeParenthesis(equation).split(/\+|-|=/); //Remueve parentesis y luego separa en monomios
 
-    let flatMultiplication = cleanEquation.replace(/\)\(/g, '*'); //Homogeniza la notacion p[ara multiplicacion
-    let factors = removeParenthesis(flatMultiplication).split(/\+|\*|\/|-/); //Remueve parentesis y luego separa todos los factores correspondientes
-
+    let flatMultiplication = equation.replace(/\)\(/g, '*'); //Homogeniza la notacion p[ara multiplicacion
+    let factors = removeParenthesis(flatMultiplication).split(/\*|\/|=/); //Remueve parentesis y luego separa todos los factores correspondientes
     let allFactors = monomios.concat(factors); //Unificacion de todos los factores generados
 
     let finalFactors = [...new Set(allFactors)]; //Elimina los monomios repetidos
@@ -32,9 +29,12 @@ export default function Factores(props) {
 
   return (
     <div>
-      <button onClick={equationSeparator}>Separate</button>
+      <button onClick={equationSeparator}>Generar Factores</button>
 
-      <Botones factores={equationFactors} />
+      <Botones
+        factores={equationFactors}
+        currentOperation={sendCurrentOperation}
+      />
     </div>
   );
 }
