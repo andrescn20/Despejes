@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Botones from './Botones';
 
 export default function Factores(props) {
@@ -26,10 +26,12 @@ export default function Factores(props) {
 
     setEquationFactors(finalFactors); //Modifica el estado definido
   }
-
+  useEffect(() => {
+    equationSeparator();
+  }, [equation]);
   return (
     <div>
-      <button onClick={equationSeparator}>Generar Factores</button>
+      {/* <button onClick={equationSeparator}>Generar Factores</button> */}
 
       <Botones
         factores={equationFactors}

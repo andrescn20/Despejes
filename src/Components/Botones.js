@@ -1,4 +1,6 @@
 import React from 'react';
+import 'katex/dist/katex.min.css';
+import { InlineMath } from 'react-katex';
 
 export default function Botones(props) {
   const { currentOperation, factores } = props;
@@ -12,7 +14,7 @@ export default function Botones(props) {
   const botones = factores.map((factor) => {
     return (
       <button onClick={handleClick} value={factor} key={factor}>
-        {factor}
+        <InlineMath>{factor}</InlineMath>
       </button>
     );
   });
