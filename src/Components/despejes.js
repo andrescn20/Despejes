@@ -77,7 +77,15 @@ class Equation {
   power(a) {
     //Eleva al cuadrado
     this.eqLeft = nerdamer('(' + this.eqLeft + ')^(' + a + ')');
-    this.eqRight = nerdamer('(' + this.eqRight + ')(' + a + ')');
+    this.eqRight = nerdamer('(' + this.eqRight + ')^(' + a + ')');
+    this.eq = this.eqLeft + '=' + this.eqRight;
+    this.Latex = nerdamer(this.eq).toTeX();
+  }
+
+  negativePower(a) {
+    //Eleva al cuadrado
+    this.eqLeft = nerdamer('(' + this.eqLeft + ')^(1/' + a + ')');
+    this.eqRight = nerdamer('(' + this.eqRight + ')^(1/' + a + ')');
     this.eq = this.eqLeft + '=' + this.eqRight;
     this.Latex = nerdamer(this.eq).toTeX();
   }

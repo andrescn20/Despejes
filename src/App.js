@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
 import InputField from './Components/InputField';
 import Sumar from './Components/Sumar';
+import Restar from './Components/Restar';
 import Multiplicar from './Components/Multiplicar';
 import Revision from './Components/Revision';
 import Dividir from './Components/Dividir';
 import Potencia from './Components/Potencia';
+import Raiz from './Components/Raiz';
 import Factores from './Components/Factores';
 
 function App() {
   const initialEquation = 'x_f - x_i = v_i*t+(1/2)(a)(t^2)';
   const initialVariable = 'a';
+
   //Determina le ecuación inicial
   const [equation, setEquation] = React.useState(initialEquation);
 
@@ -24,14 +27,14 @@ function App() {
   const [currentVariable, setcurrentVariable] = React.useState(initialVariable);
 
   //Operacion actual
-  const [currentOperation, setCurrentOperation] = React.useState('1');
+  const [currentFactor, setCurrentFactor] = React.useState('1');
 
   //Registro de operaciones
   const [history, setHistory] = React.useState([initialEquation]);
 
   //Actualiza la operación actual a utilizar
-  function changeCurrentOperation(currentOperation) {
-    setCurrentOperation(currentOperation);
+  function changeCurrentFactor(currentFactor) {
+    setCurrentFactor(currentFactor);
   }
 
   //Modifica la ecuación actual
@@ -49,9 +52,7 @@ function App() {
     addToHistory(changingEquation);
   };
 
-  const clearEquation = () => {
-    setEquation('');
-  };
+  const clearEquation = () => {};
 
   const goBack = () => {
     if (history.length === 1) {
@@ -63,9 +64,9 @@ function App() {
   //Cada vez que cambia la ecuación actual, se agrega al historial,
   useEffect(() => {}, [history]);
 
-  useEffect(() => {
-    console.log(history);
-  }, [history]);
+  // useEffect(() => {
+  //   console.log(equation);
+  // }, [equation]);
 
   useEffect(() => {
     setEquation(history[history.length - 1]);
@@ -85,41 +86,73 @@ function App() {
     setcurrentVariable(e.target.value);
   };
 
+  const handleOperation = (modifiedEquation) => {
+    setHistory((history) => [...history, modifiedEquation]);
+  };
+
   return (
     <div className='App'>
-      <div className='operaciones'>
+      <div className='operations'>
         <h2>Operaciones</h2>
-        <p>Introduzca la ecuación a manipular</p>
-        <form onSubmit={submitEquation}>
+        <p>Introduzca la ecuación para la cuál desea despejar</p>
+        <form className='operationForm' onSubmit={submitEquation}>
           <input
+            className='inputOperation'
             type='text'
             placeholder='x_f - x_i = v_i*t+(1/2)(a)(t^2)'
             onChange={handleEquationChange}
           ></input>
-          <button type='submit'>Añadir Ecuación </button>
+          <button className='addEquation' type='submit'>
+            Añadir Ecuación{' '}
+          </button>
         </form>
         <InputField equation={equation} />
-        <button onClick={goBack}> Deshacer </button>
-        <button onClick={clearEquation}> Limpiar </button>
-        <Factores equation={equation} setOperation={changeCurrentOperation} />
-        <Sumar name={'Sumar'} handleClick={addToHistory} equation={equation} />
-        <Multiplicar
-          name={'Multiplicar'}
-          handleClick={addToHistory}
+        <div className='displayBtns'>
+          <button onClick={goBack}> Deshacer </button>
+          <button onClick={clearEquation}> Limpiar </button>
+        </div>
+        <Factores
           equation={equation}
+          changeCurrentFactor={changeCurrentFactor}
         />
-        <Dividir
-          name={'Dividir'}
-          handleClick={addToHistory}
-          equation={equation}
-          operation={currentOperation}
-          history={history}
-        />
-        <Potencia
-          name={'Potencia'}
-          handleClick={addToHistory}
-          equation={equation}
-        />
+        <div className='operationBtns'>
+          <Sumar
+            name={'Sumar'}
+            handleOperation={handleOperation}
+            equation={equation}
+            factor={currentFactor}
+          />
+          <Restar
+            name={'Restar'}
+            handleOperation={handleOperation}
+            equation={equation}
+            factor={currentFactor}
+          />
+          <Multiplicar
+            name={'Multiplicar'}
+            handleOperation={handleOperation}
+            equation={equation}
+            factor={currentFactor}
+          />
+          <Dividir
+            name={'Dividir'}
+            handleOperation={handleOperation}
+            equation={equation}
+            factor={currentFactor}
+          />
+          <Potencia
+            name={'Potencia'}
+            handleOperation={handleOperation}
+            equation={equation}
+            factor={currentFactor}
+          />
+          <Raiz
+            name={'Raiz'}
+            handleOperation={handleOperation}
+            equation={equation}
+            factor={currentFactor}
+          />
+        </div>
       </div>
 
       <div className='revision'>

@@ -1,25 +1,18 @@
 import React from 'react';
 import Equation from './despejes';
 
-export default function Sumar(props) {
-  const { equation, name, handleClick } = props;
-  const [operation, setOperation] = React.useState('');
+export default function Sumar({ equation, name, handleOperation, factor }) {
   const currentEquation = new Equation(equation);
 
   const updateEquation = (e) => {
     e.preventDefault();
     currentEquation.setEquation();
-    currentEquation.suma(operation);
-    handleClick(currentEquation.eq);
-  };
-
-  const handleChange = (e) => {
-    setOperation(e.target.value);
+    currentEquation.suma(factor);
+    handleOperation(currentEquation.eq);
   };
 
   return (
     <form onSubmit={updateEquation}>
-      <input type='text' onChange={handleChange} value={operation}></input>
       <button type='submit'>{name}</button>
     </form>
   );

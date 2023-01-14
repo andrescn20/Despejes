@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'katex/dist/katex.min.css';
-import { InlineMath } from 'react-katex';
+// import { InlineMath } from 'react-katex';
 
-export default function Botones(props) {
-  const { currentOperation, factores } = props;
-  const [operation, setOperation] = React.useState('');
+export default function Botones({ sendCurrentOperation, factores }) {
+  // const [operationList, setOperationList] = useState([]);
 
   const handleClick = (e) => {
-    setOperation(e.target.value);
-    currentOperation(operation);
+    let currentOperation = e.target.value;
+    sendCurrentOperation(currentOperation);
   };
+
+  // const operationArray = factores.map((factor) => {
+  //   return factor;
+  // });
 
   const botones = factores.map((factor) => {
     return (
-      <button onClick={handleClick} value={factor} key={factor}>
-        <InlineMath>{factor}</InlineMath>
+      <button onClick={handleClick} key={factor} value={factor}>
+        {factor}
       </button>
     );
   });
 
-  return <div>{botones}</div>;
+  return <div className='factors'>{botones}</div>;
 }

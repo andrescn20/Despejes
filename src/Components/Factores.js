@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import Botones from './Botones';
 
-export default function Factores(props) {
-  const { equation, setOperation } = props;
+export default function Factores({ equation, changeCurrentFactor }) {
   const [equationFactors, setEquationFactors] = React.useState([]);
 
   const sendCurrentOperation = (currentOperation) => {
-    setOperation(currentOperation);
+    changeCurrentFactor(currentOperation);
   };
 
   const removeParenthesis = (array) => {
@@ -31,11 +30,9 @@ export default function Factores(props) {
   }, [equation]);
   return (
     <div>
-      {/* <button onClick={equationSeparator}>Generar Factores</button> */}
-
       <Botones
         factores={equationFactors}
-        currentOperation={sendCurrentOperation}
+        sendCurrentOperation={sendCurrentOperation}
       />
     </div>
   );

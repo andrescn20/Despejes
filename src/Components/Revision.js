@@ -32,7 +32,9 @@ export default function Revision(props) {
     <div>
       <button onClick={revisar}>Revisar</button>
       <p>{solutionStatus}</p>
-      <BlockMath math={`${variable}=${latexSolution}`} />
+      <div className='displayRevision'>
+        <BlockMath math={`${variable}=${latexSolution}`} />
+      </div>
     </div>
   );
 }
