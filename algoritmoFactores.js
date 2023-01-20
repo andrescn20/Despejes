@@ -1,13 +1,24 @@
-import React, { useEffect } from 'react';
-import Botones from './Botones';
-import Extractor from 'extract-brackets';
+// Para usar la libreria extract-brackets
+// npm i extract-brackets
 
-export default function Factores({ equation, changeCurrentFactor }) {
-  const [equationFactors, setEquationFactors] = React.useState([]);
-
+var Extractor = require('extract-brackets');
 
 var ExtractParents = new Extractor('(');
 
+
+// Estos comentarios son para aprender a usar el Extractor
+
+// var out2 = ExtractParents.extract('(2x+1)/((3x+4)*(5x+6)) + 5');
+
+// console.log(out2);
+// console.log(out2[0].str); //2x+1
+// console.log(out2[1].str); //(3x+4)*(5x+6)
+// console.log(out2[1].nest[0].str); //(3x+4)
+// console.log(out2[1].nest[2].str); //5x+6
+
+// console.log(out2.length, out2[1].nest.length);
+
+// console.log("Ahora a probar las funciones");
 
 // Primero voy a definir una función que extraiga el texto entre paréntesis
 
@@ -28,7 +39,6 @@ function parentesis(string) {
 // Ahora voy a crear una función que elemina de los strings el texto dentro de un paréntesis
 
 function eliminarGrupoParentesis(string){
-  let gruposFiltrado
     let eq = string;
     let grupos = parentesis(eq);  //Se extraen los grupos
     for (let i = 0; i < grupos.length; i++){
@@ -93,7 +103,7 @@ function grupos(eq) {
     var grupos = [];
     //Primero separar el lado izquiero del derecho
     let lados = eq.split("=");
-    for (let i=0; i<lados.length; i++){
+    for (i=0; i<lados.length; i++){
         let gruposParentesis = parentesis(lados[i]);
         let gruposSumaResta = sumaResta(lados[i]);
         let gruposMultDiv = multDiv(lados[i]);
@@ -104,7 +114,7 @@ function grupos(eq) {
     }
     // Eliminar parentesis vacíos
     var gruposFiltrado = [];
-    for(let j=0; j<grupos.length; j++){
+    for(j=0; j<grupos.length; j++){
         if (!noMatematico(grupos[j])) {  //Es decir, si es un término matemático
             gruposFiltrado.push(grupos[j]);
         }
@@ -117,44 +127,39 @@ function grupos(eq) {
             gruposFiltrado2.push(gruposFiltrado[k].replaceAll(/\s/g, '')); //Se eliminan los espacios en blanco
         }
     }
-    setEquationFactors([...new Set(gruposFiltrado2)]); //Para eliminar términos repetidos
+    return [...new Set(gruposFiltrado2)]; //Para eliminar términos repetidos
 }
 
 
-  const sendCurrentOperation = (currentOperation) => {
-    changeCurrentFactor(currentOperation);
-  };
 
-  const removeParenthesis = (array) => {
-    //Funcion para remover parentesis cuando sea necesario
-    return array.replace(/\(|\)/g, '');
-  };
+//Pruebas
+var eq1 = "v=d/t";
+console.log("grupos de la ecuacion", eq1, "\n", grupos(eq1));
 
-  function equationSeparator() {
-    //Funcion principal que separa los distintos factores
-    let monomios = removeParenthesis(equation).split(/\+|-|=/); //Remueve parentesis y luego separa en monomios
+var eq2 = "a=(vf-vi)/t";
+console.log("grupos de la ecuacion \n", eq2, "\n", grupos(eq2));
 
-    let flatMultiplication = equation.replace(/\)\(/g, '*'); //Homogeniza la notacion p[ara multiplicacion
-    let factors = removeParenthesis(flatMultiplication).split(/\*|\/|=/); //Remueve parentesis y luego separa todos los factores correspondientes
-    let allFactors = monomios.concat(factors); //Unificacion de todos los factores generados
+var eq3 = "d = vi*t + a*t**2/2";
+console.log("grupos de la ecuacion \n", eq3, "\n", grupos(eq3));
 
-    let finalFactors = [...new Set(allFactors)]; //Elimina los monomios repetidos
+var eq4 = "vf**2 = vi**2 + 2*a*d";
+console.log("grupos de la ecuacion \n", eq4, "\n", grupos(eq4));
 
-    setEquationFactors(finalFactors); //Modifica el estado definido
-  }
+var eq5 = "d = (vf+vi)*t/2";
+console.log("grupos de la ecuacion \n", eq5, "\n", grupos(eq5));
+
+var eq6 = "5 = 1/(x+5) + 3";
+console.log("grupos de la ecuacion \n", eq6, "\n", grupos(eq6));
+
+var eq7 = "6*x + 8 = 2*x +9";
+console.log("grupos de la ecuacion \n", eq7, "\n", grupos(eq7));
+
+var eq8 = "1 = (x+4)/(3*x+8)";
+console.log("grupos de la ecuacion \n", eq8, "\n", grupos(eq8));
 
 
-  useEffect(() => {
-   grupos(equation);
-  }, [equation]);
-  return (
-    <div>
-      <Botones
-        factores={equationFactors}
-        sendCurrentOperation={sendCurrentOperation}
-      />
-    </div>
-  );
-}
 
-// x = v*t + (1/2)*g*(t^2)
+
+
+
+

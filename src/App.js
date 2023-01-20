@@ -50,6 +50,7 @@ function App() {
   const submitEquation = (e) => {
     e.preventDefault();
     addToHistory(changingEquation);
+    setCurrentFactor('');
   };
 
   const clearEquation = () => {};
