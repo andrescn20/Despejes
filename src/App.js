@@ -1,36 +1,38 @@
-import React, { useEffect } from 'react';
-import InputField from './Components/InputField';
-import Sumar from './Components/Sumar';
-import Restar from './Components/Restar';
-import Multiplicar from './Components/Multiplicar';
-import Revision from './Components/Revision';
-import Dividir from './Components/Dividir';
-import Potencia from './Components/Potencia';
-import Raiz from './Components/Raiz';
-import Factores from './Components/Factores';
+import React, { useEffect, useState} from "react";
+import InputField from "./Components/InputField";
+import Sumar from "./Components/Sumar";
+import Restar from "./Components/Restar";
+import Multiplicar from "./Components/Multiplicar";
+import RevisionContainer from "./Components/RevisionContainer";
+import Dividir from "./Components/Dividir";
+import Potencia from "./Components/Potencia";
+import Raiz from "./Components/Raiz";
+import Factores from "./Components/Factores";
+import Boton from "./Components/Boton";
 
 function App() {
-  const initialEquation = 'x_f - x_i = v_i*t+(1/2)(a)(t^2)';
-  const initialVariable = 'a';
+  const initialEquation = "x_f - x_i = v_i*t+(1/2)(a)(t^2)";
+  const initialVariable = "a";
 
   //Determina le ecuación inicial
-  const [equation, setEquation] = React.useState(initialEquation);
+  const [equation, setEquation] = useState(initialEquation);
 
   //Ecuación temperal que el usuario digita y luego añade
   const [changingEquation, setChangingEquation] =
-    React.useState(initialEquation);
+    useState(initialEquation);
 
   //Variable que se utiliza como referencia para la revisión automática
-  const [variable, setVariable] = React.useState(initialVariable);
+  const [variable, setVariable] = useState(initialVariable);
 
   //Variable actual
-  const [currentVariable, setcurrentVariable] = React.useState(initialVariable);
+  const [currentVariable, setcurrentVariable] = useState(initialVariable);
 
   //Operacion actual
-  const [currentFactor, setCurrentFactor] = React.useState('1');
+  const [currentFactor, setCurrentFactor] = useState("1");
 
   //Registro de operaciones
-  const [history, setHistory] = React.useState([initialEquation]);
+  const [history, setHistory] = useState([initialEquation]);
+
 
   //Actualiza la operación actual a utilizar
   function changeCurrentFactor(currentFactor) {
@@ -50,14 +52,15 @@ function App() {
   const submitEquation = (e) => {
     e.preventDefault();
     addToHistory(changingEquation);
-    setCurrentFactor('');
+    setCurrentFactor("");
   };
 
   const clearEquation = () => {};
 
+
   const goBack = () => {
     if (history.length === 1) {
-      alert('No quedan acciones por deshacer');
+      alert("No quedan acciones por deshacer");
     } else {
       setHistory((history) => history.slice(0, history.length - 1));
     }
@@ -92,89 +95,80 @@ function App() {
   };
 
   return (
-    <div className='App'>
-      <div className='operations'>
+    <div className="App px-12 py-8 ">
+      <div className="flex flex-col items-center gap-4">
         <h2>Operaciones</h2>
         <p>Introduzca la ecuación para la cuál desea despejar</p>
-        <form className='operationForm' onSubmit={submitEquation}>
+        <form className="flex flex-col px-8" onSubmit={submitEquation}>
           <input
-            className='inputOperation'
-            type='text'
-            placeholder='x_f - x_i = v_i*t+(1/2)(a)(t^2)'
+            className="bg-slate-200 p-2 mb-4 mx-2 rounded-xl font-medium text-center w-96 shadow-lg self-center border-2-white"
+            type="text"
+            placeholder="x_f - x_i = v_i*t+(1/2)(a)(t^2)"
             onChange={handleEquationChange}
           ></input>
-          <button className='addEquation' type='submit'>
-            Añadir Ecuación{' '}
-          </button>
+          <Boton text="Añadir Ecuación" type="submit" />
         </form>
+
         <InputField equation={equation} />
-        <div className='displayBtns'>
-          <button onClick={goBack}> Deshacer </button>
-          <button onClick={clearEquation}> Limpiar </button>
+        <div className="">
+          <Boton onClick={goBack} text="Deshacer" isRed={true} />
+          <Boton onClick={clearEquation} text="Limpiar" isRed={true} />
         </div>
+
         <Factores
           equation={equation}
           changeCurrentFactor={changeCurrentFactor}
         />
-        <div className='operationBtns'>
+
+        <div className="grid grid-cols-3 justify-center">
           <Sumar
-            name={'Sumar'}
+            className="self-center"
+            name={"Sumar"}
             handleOperation={handleOperation}
             equation={equation}
             factor={currentFactor}
           />
           <Restar
-            name={'Restar'}
+            name={"Restar"}
             handleOperation={handleOperation}
             equation={equation}
             factor={currentFactor}
           />
           <Multiplicar
-            name={'Multiplicar'}
+            name={"Multiplicar"}
             handleOperation={handleOperation}
             equation={equation}
             factor={currentFactor}
           />
           <Dividir
-            name={'Dividir'}
+            name={"Dividir"}
             handleOperation={handleOperation}
             equation={equation}
             factor={currentFactor}
           />
           <Potencia
-            name={'Potencia'}
+            name={"Potencia"}
             handleOperation={handleOperation}
             equation={equation}
             factor={currentFactor}
           />
           <Raiz
-            name={'Raiz'}
+            name={"Raiz"}
             handleOperation={handleOperation}
             equation={equation}
             factor={currentFactor}
           />
         </div>
       </div>
-
-      <div className='revision'>
-        <h2>Revisión</h2>
-        <p>Elija la variable para la cuál desea despejar</p>
-        <form onSubmit={submitVariable}>
-          <input
-            type='text'
-            placeholder='a'
-            onChange={handleVariableChange}
-          ></input>
-          <button type='submit'>Elegir variable </button>
-        </form>
-        <p>
-          {' '}
-          A continuación, se le presentan las operaciones que puede utilizar.
-          Escriba la variable/número que la operación va a utilizar.{' '}
-        </p>
-        <Revision equation={equation} variable={variable} />
+    
+      <div className="flex justify-center mt-12">
+        <RevisionContainer
+        submitVariable = {submitVariable}
+        handleVariableChange = {handleVariableChange}
+        equation={equation}
+        variable={variable}/>
+        </div>
       </div>
-    </div>
   );
 }
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import Equation from './despejes';
+import Operacion from './Operacion';
+
 
 export default function Potencia({ name, equation, factor, handleOperation }) {
   const currentEquation = new Equation(equation);
@@ -13,7 +15,7 @@ export default function Potencia({ name, equation, factor, handleOperation }) {
 
   return (
     <form onSubmit={updateEquation}>
-      <button type='submit'>{name}</button>
+      <Operacion text={name}/>
     </form>
   );
 }

@@ -14,7 +14,7 @@ export default function InputField({ equation }) {
   }, [equation]);
 
   return (
-    <div className='displayOperation'>
+    <div className='bg-slate-200 px-4 rounded-2xl py-2 text-center'>
       <BlockMath math={currentEquation.Latex} />
     </div>
   );

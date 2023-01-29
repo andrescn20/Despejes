@@ -2,6 +2,7 @@ import React from 'react';
 import Equation from './despejes';
 import nerdamer from 'nerdamer/all.min';
 import { BlockMath } from 'react-katex';
+import Boton from './Boton';
 
 export default function Revision(props) {
   const { equation, variable } = props;
@@ -29,12 +30,12 @@ export default function Revision(props) {
   }
 
   return (
-    <div>
-      <button onClick={revisar}>Revisar</button>
-      <p>{solutionStatus}</p>
-      <div className='displayRevision'>
+    <div className='flex flex-col'>
+      <div className=''>
         <BlockMath math={`${variable}=${latexSolution}`} />
       </div>
+      <Boton onClick={revisar} text='Revisar'/>
+      <p>{solutionStatus}</p>
     </div>
   );
 }

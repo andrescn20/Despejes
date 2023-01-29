@@ -1,5 +1,7 @@
 import React from 'react';
 import Equation from './despejes';
+import Operacion from './Operacion';
+
 
 export default function Multiplicar(props) {
   const { equation, name, handleOperation, factor } = props;
@@ -15,7 +17,8 @@ export default function Multiplicar(props) {
 
   return (
     <form onSubmit={updateEquation}>
-      <button type='submit'> {name}</button>
+      <Operacion text={name}/>
+
     </form>
   );
 }
