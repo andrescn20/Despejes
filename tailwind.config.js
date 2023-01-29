@@ -4,7 +4,11 @@ module.exports = {
     "src/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'chalckboard': "url('./Images/green.jpg')",
+      }
+    },
   },
   plugins: [],
 }
