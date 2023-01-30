@@ -1,25 +1,28 @@
-import React, { useEffect, useState} from "react";
-import InputField from "./Components/InputField";
-import Sumar from "./Components/Sumar";
-import Restar from "./Components/Restar";
-import Multiplicar from "./Components/Multiplicar";
-import RevisionContainer from "./Components/RevisionContainer";
-import Dividir from "./Components/Dividir";
-import Potencia from "./Components/Potencia";
-import Raiz from "./Components/Raiz";
-import Factores from "./Components/Factores";
-import Boton from "./Components/Boton";
+import React, { useEffect, useState } from 'react';
+import InputField from './Components/InputField';
+import Sumar from './Components/Operaciones/Sumar';
+import Restar from './Components/Operaciones/Restar';
+import Multiplicar from './Components/Operaciones/Multiplicar';
+import RevisionContainer from './Components/RevisionContainer';
+import Dividir from './Components/Operaciones/Dividir';
+import Potencia from './Components/Operaciones/Potencia';
+import Raiz from './Components/Operaciones/Raiz';
+import Factores from './Components/Factores';
+import Boton from './Components/Boton';
+import Simplificar from './Components/Operaciones/Simplificar';
+import Expandir from './Components/Operaciones/Expandir';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
 
 function App() {
-  const initialEquation = "x_f - x_i = v_i*t+(1/2)(a)(t^2)";
-  const initialVariable = "a";
+  const initialEquation = 'x_f - x_i = v_i*t+(1/2)(a)(t^2)';
+  const initialVariable = 'a';
 
   //Determina le ecuación inicial
   const [equation, setEquation] = useState(initialEquation);
 
   //Ecuación temperal que el usuario digita y luego añade
-  const [changingEquation, setChangingEquation] =
-    useState(initialEquation);
+  const [changingEquation, setChangingEquation] = useState(initialEquation);
 
   //Variable que se utiliza como referencia para la revisión automática
   const [variable, setVariable] = useState(initialVariable);
@@ -28,11 +31,10 @@ function App() {
   const [currentVariable, setcurrentVariable] = useState(initialVariable);
 
   //Operacion actual
-  const [currentFactor, setCurrentFactor] = useState("1");
+  const [currentFactor, setCurrentFactor] = useState('1');
 
   //Registro de operaciones
   const [history, setHistory] = useState([initialEquation]);
-
 
   //Actualiza la operación actual a utilizar
   function changeCurrentFactor(currentFactor) {
@@ -52,15 +54,14 @@ function App() {
   const submitEquation = (e) => {
     e.preventDefault();
     addToHistory(changingEquation);
-    setCurrentFactor("");
+    setCurrentFactor('');
   };
 
   const clearEquation = () => {};
 
-
   const goBack = () => {
     if (history.length === 1) {
-      alert("No quedan acciones por deshacer");
+      alert('No quedan acciones por deshacer');
     } else {
       setHistory((history) => history.slice(0, history.length - 1));
     }
@@ -95,24 +96,25 @@ function App() {
   };
 
   return (
-    <div className="App px-12 py-8 ">
-      <div className="flex flex-col items-center gap-4">
+    <div className=''>
+      <Header />
+      <div className='flex flex-col items-center gap-4'>
         <h2>Operaciones</h2>
         <p>Introduzca la ecuación para la cuál desea despejar</p>
-        <form className="flex flex-col px-8" onSubmit={submitEquation}>
+        <form className='flex flex-col px-8' onSubmit={submitEquation}>
           <input
-            className="bg-slate-200 p-2 mb-4 mx-2 rounded-xl font-medium text-center w-96 shadow-lg self-center border-2-white"
-            type="text"
-            placeholder="x_f - x_i = v_i*t+(1/2)(a)(t^2)"
+            className='bg-slate-200 p-2 mb-4 mx-2 rounded-xl font-medium text-center w-96 shadow-lg self-center border-2-white'
+            type='text'
+            placeholder='x_f - x_i = v_i*t+(1/2)(a)(t^2)'
             onChange={handleEquationChange}
           ></input>
-          <Boton text="Añadir Ecuación" type="submit" />
+          <Boton text='Añadir Ecuación' type='submit' />
         </form>
 
         <InputField equation={equation} />
-        <div className="">
-          <Boton onClick={goBack} text="Deshacer" isRed={true} />
-          <Boton onClick={clearEquation} text="Limpiar" isRed={true} />
+        <div className=''>
+          <Boton onClick={goBack} text='Deshacer' isRed={true} />
+          <Boton onClick={clearEquation} text='Limpiar' isRed={true} />
         </div>
 
         <Factores
@@ -120,55 +122,69 @@ function App() {
           changeCurrentFactor={changeCurrentFactor}
         />
 
-        <div className="grid grid-cols-3 justify-center">
+        <div className='grid grid-cols-3 justify-center gap-2'>
           <Sumar
-            className="self-center"
-            name={"Sumar"}
+            className='self-center'
+            name={'Sumar'}
             handleOperation={handleOperation}
             equation={equation}
             factor={currentFactor}
           />
           <Restar
-            name={"Restar"}
+            name={'Restar'}
             handleOperation={handleOperation}
             equation={equation}
             factor={currentFactor}
           />
           <Multiplicar
-            name={"Multiplicar"}
+            name={'Multiplicar'}
             handleOperation={handleOperation}
             equation={equation}
             factor={currentFactor}
           />
           <Dividir
-            name={"Dividir"}
+            name={'Dividir'}
             handleOperation={handleOperation}
             equation={equation}
             factor={currentFactor}
           />
           <Potencia
-            name={"Potencia"}
+            name={'Potencia'}
             handleOperation={handleOperation}
             equation={equation}
             factor={currentFactor}
           />
           <Raiz
-            name={"Raiz"}
+            name={'Raiz'}
+            handleOperation={handleOperation}
+            equation={equation}
+            factor={currentFactor}
+          />
+          <Simplificar
+            name={'Simplificar'}
+            handleOperation={handleOperation}
+            equation={equation}
+            factor={currentFactor}
+          />
+          <Expandir
+            name={'Expandir'}
             handleOperation={handleOperation}
             equation={equation}
             factor={currentFactor}
           />
         </div>
       </div>
-    
-      <div className="flex justify-center mt-12">
+
+      <div className='flex justify-center my-6'>
         <RevisionContainer
-        submitVariable = {submitVariable}
-        handleVariableChange = {handleVariableChange}
-        equation={equation}
-        variable={variable}/>
-        </div>
+          submitVariable={submitVariable}
+          handleVariableChange={handleVariableChange}
+          equation={equation}
+          variable={variable}
+        />
       </div>
+      <Footer />
+    </div>
   );
 }
 
