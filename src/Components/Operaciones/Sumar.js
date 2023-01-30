@@ -1,7 +1,6 @@
 import React from 'react';
-import Equation from './despejes';
-import Operacion from './Operacion';
-
+import Equation from '../despejes';
+import Operacion from '../Operacion';
 
 export default function Sumar({ equation, name, handleOperation, factor }) {
   const currentEquation = new Equation(equation);
@@ -9,13 +8,13 @@ export default function Sumar({ equation, name, handleOperation, factor }) {
   const updateEquation = (e) => {
     e.preventDefault();
     currentEquation.setEquation();
-    currentEquation.resta(factor);
+    currentEquation.suma(factor);
     handleOperation(currentEquation.eq);
   };
 
   return (
     <form onSubmit={updateEquation}>
-       <Operacion text={name}/>
+      <Operacion text={name} />
     </form>
   );
 }
