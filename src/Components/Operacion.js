@@ -5,7 +5,7 @@ export default function Operacion({ text }) {
     <div className='flex'>
       <button
         type='submit'
-        className='rounded-xl w-24 py-1 shadow-md shadow-gray-400 self-center  my-1'
+        className='rounded-lg w-24 py-1 shadow-sm shadow-gray-500 self-center  my-1 active:activeFactor'
       >
         {text}
       </button>
