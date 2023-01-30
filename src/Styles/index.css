@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-#activeFactor{
-  background-color: rgb(66, 96, 136);
+#activeFactor {
+  box-shadow: inset 3px 3px 5px -2px rgba(0, 0, 0, 0.746);
 }
 
-h2{
+h2 {
   font-size: 1.5rem;
   font-weight: 500;
 }
