@@ -1,8 +1,8 @@
-
 import Botones from './Botones';
 import Extractor from 'extract-brackets';
 import React, {useEffect} from 'react';
 import nerdamer from 'nerdamer';
+
 
 export default function Factores({ equation, changeCurrentFactor }) {
     const [equationFactors, setEquationFactors] = React.useState([]);
@@ -222,5 +222,3 @@ export default function Factores({ equation, changeCurrentFactor }) {
         </div>
     );
 }
-
-// x = v*t + (1/2)g(t^2)
