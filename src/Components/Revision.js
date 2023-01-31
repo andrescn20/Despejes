@@ -18,8 +18,10 @@ export default function Revision(props) {
 
   const latexSolution = nerdamer.convertToLaTeX(`${cleanSolution}`);
 
+
   const eqLeft = nerdamer(currentEquation.eqLeft).text('fractions');
   const eqRight = nerdamer(currentEquation.eqRight).text('fractions');
+
 
   function revisar() {
     if (eqLeft === cleanSolution || eqRight === cleanSolution) {

@@ -8,7 +8,7 @@ export default function Potencia({ name, equation, factor, handleOperation }) {
   const updateEquation = (e) => {
     e.preventDefault();
     currentEquation.setEquation();
-    currentEquation.negativePower(factor);
+    currentEquation.root();  //Por el momento, solo saca raices cuadradas
     handleOperation(currentEquation.eq);
   };
 
