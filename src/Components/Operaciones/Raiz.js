@@ -1,24 +1,20 @@
 import React from 'react';
-import Equation from './despejes';
-import Operacion from './Operacion';
+import Equation from '../despejes';
+import Operacion from '../Operacion';
 
-
-export default function Multiplicar(props) {
-  const { equation, name, handleOperation, factor } = props;
-
+export default function Potencia({ name, equation, factor, handleOperation }) {
   const currentEquation = new Equation(equation);
 
   const updateEquation = (e) => {
     e.preventDefault();
     currentEquation.setEquation();
-    currentEquation.mult(factor);
+    currentEquation.negativePower(factor);
     handleOperation(currentEquation.eq);
   };
 
   return (
     <form onSubmit={updateEquation}>
-      <Operacion text={name}/>
-
+      <Operacion text={name} />
     </form>
   );
 }
