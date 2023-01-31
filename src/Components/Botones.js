@@ -1,6 +1,7 @@
 import React from 'react';
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
+import nerdamer from 'nerdamer';
 
 export default function Botones({ sendCurrentOperation, factores }) {
   // const [operationList, setOperationList] = useState([]);
@@ -48,7 +49,7 @@ export default function Botones({ sendCurrentOperation, factores }) {
           <button
             onClick={handleClick}
             key={factor}
-            value={factor}
+            value={nerdamer.convertFromLaTeX(factor)}
             className='h-full w-full absolute top-0 left-0 z-30 factor rounded-lg shadow-sm shadow-gray-500'
           ></button>
         </div>

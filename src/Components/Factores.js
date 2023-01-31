@@ -1,121 +1,132 @@
-import React, { useEffect } from 'react';
 import Botones from './Botones';
 import Extractor from 'extract-brackets';
+import React, {useEffect} from 'react';
+import nerdamer from 'nerdamer';
 
-const nerdamer = require('nerdamer/all.min'); //Importar nerdamer
 
 export default function Factores({ equation, changeCurrentFactor }) {
-  const [equationFactors, setEquationFactors] = React.useState([]);
+    const [equationFactors, setEquationFactors] = React.useState([]);
 
-  var ExtractParents = new Extractor('(');
 
-  // Primero voy a definir una función que extraiga el texto entre paréntesis
+    var ExtractParents = new Extractor('(');
 
-  function parentesis(string) {
-    let grupos = [];
-    let extract = ExtractParents.extract(string);
-    for (let i = 0; i < extract.length; i++) {
-      //Grupos grandes
-      grupos.push(extract[i].str);
-      for (let j = 0; j < extract[i].nest.length; j++) {
-        //Paréntesis dentro de parentesis
-        grupos.push(extract[i].nest[j].str);
-      }
+
+    // Primero voy a definir una función que extraiga el texto entre paréntesis
+
+    function parentesis(string) {
+        let grupos = []
+        let extract = ExtractParents.extract(string);
+        for (let i = 0; i < extract.length; i++) {  //Grupos grandes
+            grupos.push(extract[i].str);
+            for (let j = 0; j < extract[i].nest.length; j++) {  //Paréntesis dentro de parentesis
+                grupos.push(extract[i].nest[j].str);
+            }
+        }
+
+        let filtrado = grupos.filter(x => x !== undefined); //Se eliminan los grupos undefined
+        return filtrado;
     }
 
-    let filtrado = grupos.filter((x) => x !== undefined); //Se eliminan los grupos undefined
-    return filtrado;
-  }
+    // Ahora voy a crear una función que elemina de los strings el texto dentro de un paréntesis
 
-  // Ahora voy a crear una función que elemina de los strings el texto dentro de un paréntesis
-  function eliminarGrupoParentesis(string) {
-    let eq = string;
-    let gruposFiltrado;
-    let grupos = parentesis(eq); //Se extraen los grupos
-    for (let i = 0; i < grupos.length; i++) {
-      gruposFiltrado = eq.replace(grupos[i], '');
-      eq = gruposFiltrado;
-    }
-    return eq;
-  }
-
-  // Funcion para eliminar terminos no matematicos
-  // Devuelve true si es un término no matemático
-  // Devuelve false si es un término matemático
-  // No matematico solo incluye / * ( )
-
-  function noMatematico(str) {
-    let output = /^[*/() ]+$/.test(str);
-    return output;
-  }
-
-  // Funcion que depara por sumas y restas
-
-  function sumaResta(str) {
-    let eq = str;
-    let eqFiltrado = eliminarGrupoParentesis(eq);
-    let output = eqFiltrado.split(/[+-]+/);
-    let outputFiltrado = []; //Array con solo elementos matematicos, pero puede haber repetidos
-    for (let i = 0; i < output.length; i++) {
-      if (!noMatematico(output[i])) {
-        //Es decir, si es un término matemático
-        outputFiltrado.push(output[i]);
-      }
+    function eliminarGrupoParentesis(string) {
+        let gruposFiltrado
+        let eq = string;
+        let grupos = parentesis(eq);  //Se extraen los grupos
+        for (let i = 0; i < grupos.length; i++) {
+            gruposFiltrado = eq.replace(grupos[i], '');
+            eq = gruposFiltrado;
+        }
+        return eq;
     }
 
-    // Eliminar elementos repetidos
-    var uniqueOutput = [];
-    outputFiltrado.forEach((c) => {
-      if (!uniqueOutput.includes(c)) {
-        uniqueOutput.push(c);
-      }
-    });
-    return uniqueOutput;
-  }
+    // Funcion para eliminar terminos no matematicos
+    // Devuelve true si es un término no matemático
+    // Devuelve false si es un término matemático
+    // No matematico solo incluye / * ( )
 
-  //Funcion que separa multiplicaciones y divisiones
-
-  function multDiv(str) {
-    let eq = str;
-    let eqFiltrado = eliminarGrupoParentesis(eq);
-    let output = eqFiltrado.split(/[*/+-]+/);
-    let outputFiltrado = [];
-    for (let i = 0; i < output.length; i++) {
-      if (!noMatematico(output[i])) {
-        //Es decir, si es un término matemático
-        outputFiltrado.push(output[i]);
-      }
+    function noMatematico(str) {
+        let output = /^[*/() ]+$/.test(str);
+        return output;
     }
-    return outputFiltrado;
-  }
 
-  //  Aqui la función para separar fracciones
+    // Funcion que depara por sumas y restas
 
-  function fracciones(str) {
-    let eqOriginal = str;
-    // Primero se extrae el texto de los parentesis
-    let parentesisOriginal = [];
-    parentesisOriginal = parentesis(eqOriginal);
-    parentesisOriginal = parentesisOriginal.sort(function (a, b) {
-      return b.length - a.length;
-    }); // https://stackoverflow.com/questions/10630766/how-to-sort-an-array-based-on-the-length-of-each-element
-    //console.log("parentesisOriginal", parentesisOriginal);
-    // Se modifica el texto de los parentesis con MAS y MENOS
-    let parentesisCambiado = [];
-    for (let i = 0; i < parentesisOriginal.length; i++) {
-      let a = parentesisOriginal[i].replaceAll('+', 'MAS');
-      let b = a.replaceAll('-', 'MENOS');
-      parentesisCambiado.push(b);
+    function sumaResta(str) {
+        let eq = str;
+        let eqFiltrado = eliminarGrupoParentesis(eq);
+        let output = eqFiltrado.split(/[+-]+/);
+        let outputFiltrado = []; //Array con solo elementos matematicos, pero puede haber repetidos
+        for (let i = 0; i < output.length; i++) {
+            if (!noMatematico(output[i])) {  //Es decir, si es un término matemático
+                outputFiltrado.push(output[i]);
+            }
+        }
+
+        // Eliminar elementos repetidos
+        var uniqueOutput = []
+        outputFiltrado.forEach((c) => {
+            if (!uniqueOutput.includes(c)) {
+                uniqueOutput.push(c);
+            }
+        });
+        return uniqueOutput;
     }
-    //console.log("parentesisCambiado", parentesisCambiado);
-    //Ahora se crea un string donde se cambia + por MAS y - por MENOS
-    let eqCambiado = eqOriginal;
-    for (let j = 0; j < parentesisOriginal.length; j++) {
-      eqCambiado = eqOriginal.replace(
-        parentesisOriginal[j],
-        parentesisCambiado[j]
-      );
-      eqOriginal = eqCambiado;
+
+    //Funcion que separa multiplicaciones y divisiones
+
+    function multDiv(str) {
+        let eq = str;
+        let eqFiltrado = eliminarGrupoParentesis(eq);
+        let output = eqFiltrado.split(/[*/+-]+/);
+        let outputFiltrado = [];
+        for (let i = 0; i < output.length; i++) {
+            if (!noMatematico(output[i])) {  //Es decir, si es un término matemático
+                outputFiltrado.push(output[i]);
+            }
+        }
+        return outputFiltrado
+    }
+
+    //  Aqui la función para separar fracciones
+
+    function fracciones(str) {
+        let eqOriginal = str;
+        // Primero se extrae el texto de los parentesis
+        let parentesisOriginal = [];
+        parentesisOriginal = parentesis(eqOriginal);
+        parentesisOriginal = parentesisOriginal.sort(function (a, b) {
+            return b.length - a.length;
+        }); // https://stackoverflow.com/questions/10630766/how-to-sort-an-array-based-on-the-length-of-each-element
+        //console.log("parentesisOriginal", parentesisOriginal);
+        // Se modifica el texto de los parentesis con MAS y MENOS
+        let parentesisCambiado = [];
+        for (let i = 0; i < parentesisOriginal.length; i++) {
+            let a = parentesisOriginal[i].replaceAll("+", "MAS");
+            let b = a.replaceAll("-", "MENOS");
+            parentesisCambiado.push(b);
+        }
+        //console.log("parentesisCambiado", parentesisCambiado);
+        //Ahora se crea un string donde se cambia + por MAS y - por MENOS
+        let eqCambiado = eqOriginal;
+        for (let j = 0; j < parentesisOriginal.length; j++) {
+            eqCambiado = eqOriginal.replace(parentesisOriginal[j], parentesisCambiado[j]);
+            eqOriginal = eqCambiado;
+        }
+        //console.log("eqCambiado", eqCambiado);
+        // Ahora vamos a separar por + y -
+        let outputOriginal = eqCambiado.split(/[+-]+/);
+
+        //console.log("outputOriginal", outputOriginal);
+        // Ahora se crea la variable que se sustituye MAS por + y MENOS por -
+        let outputCambiado = [];
+        for (let k = 0; k < outputOriginal.length; k++) {
+            let c = outputOriginal[k].replaceAll("MAS", "+");
+            let d = c.replaceAll("MENOS", "-");
+            outputCambiado.push(d);
+        }
+        //console.log("outputCambiado", outputCambiado);
+        return outputCambiado;
     }
 
     // Aqui voy a definir la función que calcula los grupos de factores
@@ -196,58 +207,18 @@ export default function Factores({ equation, changeCurrentFactor }) {
         console.log("finalFactors", finalFactors);
 
         setEquationFactors(finalFactors); //Modifica el estado definido
-
     }
 
-    // Ahora revisar que no queden paréntesis "()" vacíos
-    var gruposFiltrado2 = [];
-    for (let k = 0; k < gruposFiltrado.length; k++) {
-      if (!gruposFiltrado[k].includes('()')) {
-        gruposFiltrado2.push(gruposFiltrado[k].replaceAll(/\s/g, '')); //Se eliminan los espacios en blanco
-      }
-    }
-    gruposFiltrado2.push('-1'); //Se agrega -1 por defecto
-    let gruposFiltrado3 = gruposFiltrado2.filter((x) => x !== undefined); //Se eliminan los grupos undefined
-    let gruposLatex = [];
-    gruposFiltrado3.forEach((factor) => {
-      gruposLatex.push(factor.replace(/\*/g, '\\cdot ')); //Para tener las
-    });
-    setEquationFactors([...new Set(gruposLatex)]); //Para eliminar términos repetidos
-  }
 
-  const sendCurrentOperation = (currentOperation) => {
-    changeCurrentFactor(currentOperation);
-  };
-
-  const removeParenthesis = (array) => {
-    //Funcion para remover parentesis cuando sea necesario
-    return array.replace(/\(|\)/g, '');
-  };
-
-  function equationSeparator() {
-    //Funcion principal que separa los distintos factores
-    let monomios = removeParenthesis(equation).split(/\+|-|=/); //Remueve parentesis y luego separa en monomios
-
-    let flatMultiplication = equation.replace(/\)\(/g, '*'); //Homogeniza la notacion p[ara multiplicacion
-    let factors = removeParenthesis(flatMultiplication).split(/\*|\/|=/); //Remueve parentesis y luego separa todos los factores correspondientes
-    let allFactors = monomios.concat(factors); //Unificacion de todos los factores generados
-
-    let finalFactors = [...new Set(allFactors)]; //Elimina los monomios repetidos
-
-    setEquationFactors(finalFactors); //Modifica el estado definido
-  }
-
-  useEffect(() => {
-    grupos(equation);
-  }, [equation]);
-  return (
-    <div>
-      <Botones
-        factores={equationFactors}
-        sendCurrentOperation={sendCurrentOperation}
-      />
-    </div>
-  );
+    useEffect(() => {
+        grupos(equation);
+    }, [equation]);
+    return (
+        <div>
+            <Botones
+                factores={equationFactors}
+                sendCurrentOperation={sendCurrentOperation}
+            />
+        </div>
+    );
 }
-
-// x = v*t + (1/2)*g*(t^2)
