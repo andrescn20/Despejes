@@ -2,8 +2,7 @@
 import Botones from './Botones';
 import Extractor from 'extract-brackets';
 import React, {useEffect} from 'react';
-
-const nerdamer = require('nerdamer/all.min'); //Importar nerdamer
+import nerdamer from 'nerdamer';
 
 export default function Factores({ equation, changeCurrentFactor }) {
     const [equationFactors, setEquationFactors] = React.useState([]);
