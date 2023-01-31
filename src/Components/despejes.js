@@ -107,6 +107,13 @@ class Equation {
     this.eq = this.eqLeft + '=' + this.eqRight;
     this.Latex = nerdamer(this.eq).toTeX();
   }
+  expand() {
+    //Hace una expanción de la expresión matemática
+    this.eqLeft = nerdamer('expand(' + this.eqLeft + ')');
+    this.eqRight = nerdamer('expand(' + this.eqRight + ')');
+    this.eq = this.eqLeft + '=' + this.eqRight;
+    this.Latex = nerdamer(this.eq).toTeX();
+  }
 }
 
 export default Equation;
