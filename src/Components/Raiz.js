@@ -1,19 +1,21 @@
 import React from 'react';
-import Equation from '../despejes';
-import Operacion from '../Operacion';
-export default function Expandir({ equation, name, handleOperation, factor }) {
+import Equation from './despejes';
+import Operacion from './Operacion';
+
+
+export default function Potencia({ name, equation, factor, handleOperation }) {
   const currentEquation = new Equation(equation);
 
   const updateEquation = (e) => {
     e.preventDefault();
     currentEquation.setEquation();
-    currentEquation.expand(currentEquation);
+    currentEquation.negativePower(factor);
     handleOperation(currentEquation.eq);
   };
 
   return (
     <form onSubmit={updateEquation}>
-      <Operacion text={name} />
+      <Operacion text={name}/>
     </form>
   );
 }

@@ -13,7 +13,7 @@ se encierre en un paréntesis los factores que ya estaban.
 class Equation {
   constructor(eq) {
     //Método constructor, toma como argumento un string con la ecuación a analizar
-    this.eq = eq//.nerdamer.text('fractions'); //String de la ecuación, en formato de nerdamer
+    this.eq = eq; //String de la ecuación, en formato de nerdamer
     this.eqLeft = undefined; //Se guardará el lado izquierdo de la ecuación
     this.eqRight = undefined; //Se guardará el lado derecho de la ecuación
     this.Latex = undefined; //Se guardará un string en formato de latex
@@ -24,9 +24,7 @@ class Equation {
     let parts = this.eq.split('='); //Separa el lado izquierdo y el lado derecho de la ecuación
     this.eqLeft = parts[0]; //Lado izquierdo
     this.eqRight = parts[1]; //Lado derecho
-    //this.Latex = nerdamer(this.eq).toTeX(); //Crea un string con la ecuación en Latex
-    //this.Nerd = nerdamer(this.eq);
-    this.Latex = nerdamer.convertToLaTeX(this.eq);
+    this.Latex = nerdamer(this.eq).toTeX(); //Crea un string con la ecuación en Latex
   }
 
   sumaUno() {
@@ -104,13 +102,6 @@ class Equation {
     //Hace una simplificación de la expresión matemática
     this.eqLeft = nerdamer('simplify(' + this.eqLeft + ')');
     this.eqRight = nerdamer('simplify(' + this.eqRight + ')');
-    this.eq = this.eqLeft + '=' + this.eqRight;
-    this.Latex = nerdamer(this.eq).toTeX();
-  }
-  expand() {
-    //Hace una expanción de la expresión matemática
-    this.eqLeft = nerdamer('expand(' + this.eqLeft + ')');
-    this.eqRight = nerdamer('expand(' + this.eqRight + ')');
     this.eq = this.eqLeft + '=' + this.eqRight;
     this.Latex = nerdamer(this.eq).toTeX();
   }
