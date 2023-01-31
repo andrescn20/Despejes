@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import Botones from './Botones';
 import Extractor from 'extract-brackets';
 
+const nerdamer = require('nerdamer/all.min'); //Importar nerdamer
+
 export default function Factores({ equation, changeCurrentFactor }) {
   const [equationFactors, setEquationFactors] = React.useState([]);
 
@@ -115,47 +117,86 @@ export default function Factores({ equation, changeCurrentFactor }) {
       );
       eqOriginal = eqCambiado;
     }
-    //console.log("eqCambiado", eqCambiado);
-    // Ahora vamos a separar por + y -
-    let outputOriginal = eqCambiado.split(/[+-]+/);
 
-    //console.log("outputOriginal", outputOriginal);
-    // Ahora se crea la variable que se sustituye MAS por + y MENOS por -
-    let outputCambiado = [];
-    for (let k = 0; k < outputOriginal.length; k++) {
-      let c = outputOriginal[k].replaceAll('MAS', '+');
-      let d = c.replaceAll('MENOS', '-');
-      outputCambiado.push(d);
+    // Aqui voy a definir la función que calcula los grupos de factores
+
+    function grupos(eq) {
+        // Se define el arreglo con los grupos 
+        var grupos = [];
+        //Primero separar el lado izquiero del derecho
+        let lados = eq.split("=");
+        for (let i = 0; i < lados.length; i++) {
+            let gruposParentesis = parentesis(lados[i]);
+            let gruposSumaResta = sumaResta(lados[i]);
+            let gruposMultDiv = multDiv(lados[i]);
+            let gruposFracciones = fracciones(lados[i]);
+
+            grupos = grupos.concat(gruposParentesis);
+            grupos = grupos.concat(gruposSumaResta);
+            grupos = grupos.concat(gruposMultDiv);
+            grupos = grupos.concat(gruposFracciones);
+        }
+        // Eliminar parentesis vacíos
+        var gruposFiltrado = [];
+        for (let j = 0; j < grupos.length; j++) {
+            if (!noMatematico(grupos[j])) {  //Es decir, si es un término matemático
+                gruposFiltrado.push(grupos[j]);
+            }
+        }
+
+        // Ahora revisar que no queden paréntesis "()" vacíos
+        var gruposFiltrado2 = [];
+        for (let k = 0; k < gruposFiltrado.length; k++) {
+            if (!gruposFiltrado[k].includes("()")) {
+                gruposFiltrado2.push(gruposFiltrado[k].replaceAll(/\s/g, '')); //Se eliminan los espacios en blanco
+            }
+        }
+        gruposFiltrado2.push("-1"); //Se agrega -1 por defecto
+        let gruposFiltrado3 = gruposFiltrado2.filter(x => x !== undefined); //Se eliminan los grupos undefined
+        
+        //Aqui empieza el intento para hacer que todos sean factores bonitos
+        for(let m = 0; m<gruposFiltrado3.length; m++){
+            console.log(gruposFiltrado3[m]);
+            let denominator = nerdamer(gruposFiltrado3[m]).denominator().toString();
+            //nerdamer(gruposFiltrado3[m]).text('fractions') se encarga de que el programa no convierta las cosas a decimal
+            //La función convertToLaTeX() básicamente lo que hace es convertir a un formato de latex donde 
+            // agarra la convención de poner ^(-1) de nerdamer, y transformar a \frac{}{} de laTeX
+            gruposFiltrado3[m] = nerdamer.convertToLaTeX(nerdamer(gruposFiltrado3[m]).text('fractions'));
+            gruposFiltrado3[m] = gruposFiltrado3[m].replace("^{1}", ""); //Eliminar los a la uno redundantes
+            console.log(gruposFiltrado3[m]);
+            console.log("denominator", m, denominator);
+        }
+        console.log("gruposFiltrado3", gruposFiltrado3);
+        // Aquí termina el arreglo
+        setEquationFactors([...new Set(gruposFiltrado3)]); //Para eliminar términos repetidos
     }
-    //console.log("outputCambiado", outputCambiado);
-    return outputCambiado;
-  }
 
-  // Aqui voy a definir la función que calcula los grupos de factores
 
-  function grupos(eq) {
-    // Se define el arreglo con los grupos
-    var grupos = [];
-    //Primero separar el lado izquiero del derecho
-    let lados = eq.split('=');
-    for (let i = 0; i < lados.length; i++) {
-      let gruposParentesis = parentesis(lados[i]);
-      let gruposSumaResta = sumaResta(lados[i]);
-      let gruposMultDiv = multDiv(lados[i]);
-      let gruposFracciones = fracciones(lados[i]);
+    const sendCurrentOperation = (currentOperation) => {
+        changeCurrentFactor(currentOperation);
+    };
 
-      grupos = grupos.concat(gruposParentesis);
-      grupos = grupos.concat(gruposSumaResta);
-      grupos = grupos.concat(gruposMultDiv);
-      grupos = grupos.concat(gruposFracciones);
-    }
-    // Eliminar parentesis vacíos
-    var gruposFiltrado = [];
-    for (let j = 0; j < grupos.length; j++) {
-      if (!noMatematico(grupos[j])) {
-        //Es decir, si es un término matemático
-        gruposFiltrado.push(grupos[j]);
-      }
+    const removeParenthesis = (array) => {
+        //Funcion para remover parentesis cuando sea necesario
+        return array.replace(/\(|\)/g, '');
+    };
+
+    function equationSeparator() {
+        //Funcion principal que separa los distintos factores
+        let monomios = removeParenthesis(equation).split(/\+|-|=/); //Remueve parentesis y luego separa en monomios
+
+        let flatMultiplication = equation.replace(/\)\(/g, '*'); //Homogeniza la notacion p[ara multiplicacion
+        let factors = removeParenthesis(flatMultiplication).split(/\*|\/|=/); //Remueve parentesis y luego separa todos los factores correspondientes
+        let allFactors = monomios.concat(factors); //Unificacion de todos los factores generados
+
+        
+
+        let finalFactors = [...new Set(allFactors)]; //Elimina los monomios repetidos
+
+        console.log("finalFactors", finalFactors);
+
+        setEquationFactors(finalFactors); //Modifica el estado definido
+
     }
 
     // Ahora revisar que no queden paréntesis "()" vacíos
