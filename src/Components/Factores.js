@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import Botones from './Botones';
 import Extractor from 'extract-brackets';
 
+const nerdamer = require('nerdamer/all.min'); //Importar nerdamer
+
 export default function Factores({ equation, changeCurrentFactor }) {
     const [equationFactors, setEquationFactors] = React.useState([]);
 
@@ -162,6 +164,21 @@ export default function Factores({ equation, changeCurrentFactor }) {
         }
         gruposFiltrado2.push("-1"); //Se agrega -1 por defecto
         let gruposFiltrado3 = gruposFiltrado2.filter(x => x !== undefined); //Se eliminan los grupos undefined
+        
+        //Aqui empieza el intento para hacer que todos sean factores bonitos
+        for(let m = 0; m<gruposFiltrado3.length; m++){
+            console.log(gruposFiltrado3[m]);
+            let denominator = nerdamer(gruposFiltrado3[m]).denominator().toString();
+            //nerdamer(gruposFiltrado3[m]).text('fractions') se encarga de que el programa no convierta las cosas a decimal
+            //La función convertToLaTeX() básicamente lo que hace es convertir a un formato de latex donde 
+            // agarra la convención de poner ^(-1) de nerdamer, y transformar a \frac{}{} de laTeX
+            gruposFiltrado3[m] = nerdamer.convertToLaTeX(nerdamer(gruposFiltrado3[m]).text('fractions'));
+            gruposFiltrado3[m] = gruposFiltrado3[m].replace("^{1}", ""); //Eliminar los a la uno redundantes
+            console.log(gruposFiltrado3[m]);
+            console.log("denominator", m, denominator);
+        }
+        console.log("gruposFiltrado3", gruposFiltrado3);
+        // Aquí termina el arreglo
         setEquationFactors([...new Set(gruposFiltrado3)]); //Para eliminar términos repetidos
     }
 
@@ -186,6 +203,8 @@ export default function Factores({ equation, changeCurrentFactor }) {
         
 
         let finalFactors = [...new Set(allFactors)]; //Elimina los monomios repetidos
+
+        console.log("finalFactors", finalFactors);
 
         setEquationFactors(finalFactors); //Modifica el estado definido
     }
