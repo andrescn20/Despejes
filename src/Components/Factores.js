@@ -163,20 +163,26 @@ export default function Factores({ equation, changeCurrentFactor }) {
             }
         }
         gruposFiltrado2.push("-1"); //Se agrega -1 por defecto
+        gruposFiltrado2.push("1");
+        gruposFiltrado2.push("2");
+        gruposFiltrado2.push("3");
+        gruposFiltrado2.push("4");
+        gruposFiltrado2.push("5");
+        gruposFiltrado2.push("6");
+        gruposFiltrado2.push("7");
+        gruposFiltrado2.push("8");
+        gruposFiltrado2.push("9");
         let gruposFiltrado3 = gruposFiltrado2.filter(x => x !== undefined); //Se eliminan los grupos undefined
         
         //Aqui empieza el intento para hacer que todos sean factores bonitos
         for(let m = 0; m<gruposFiltrado3.length; m++){
             gruposFiltrado3[m] = gruposFiltrado3[m].replace("abs", "");  //Se eliminan los valores absolutos, para permitir las raices cuadradas
-            //console.log(gruposFiltrado3[m]);
-            //let denominator = nerdamer(gruposFiltrado3[m]).denominator().toString();
             //nerdamer(gruposFiltrado3[m]).text('fractions') se encarga de que el programa no convierta las cosas a decimal
             //La función convertToLaTeX() básicamente lo que hace es convertir a un formato de latex donde 
             // agarra la convención de poner ^(-1) de nerdamer, y transformar a \frac{}{} de laTeX
             gruposFiltrado3[m] = nerdamer.convertToLaTeX(nerdamer(gruposFiltrado3[m]).text('fractions'));
             gruposFiltrado3[m] = gruposFiltrado3[m].replace("^{1}", ""); //Eliminar los a la uno redundantes
             console.log(gruposFiltrado3[m]);
-            //console.log("denominator", m, denominator);
         }
         console.log("gruposFiltrado3", gruposFiltrado3);
         // Aquí termina el arreglo
