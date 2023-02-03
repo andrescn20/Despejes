@@ -87,8 +87,8 @@ class Equation {
   negativePower(a) {
     //Eleva al cuadrado
     //Hay que agregar una rutina para eliminar los abs
-    this.eqLeft = this.eqLeft.replace("abs", "");
-    this.eqRight = this.eqRight.replace("abs", "");
+    this.eqLeft = this.eqLeft.replaceAll("abs", "");
+    this.eqRight = this.eqRight.replaceAll("abs", "");
     
     this.eqLeft = nerdamer('(' + this.eqLeft + ')^(1/' + a + ')');
     this.eqRight = nerdamer('(' + this.eqRight + ')^(1/' + a + ')');

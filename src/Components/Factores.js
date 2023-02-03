@@ -46,6 +46,7 @@ export default function Factores({ equation, changeCurrentFactor }) {
     // No matematico solo incluye / * ( )
 
     function noMatematico(str) {
+        //let output = str.replaceAll("()", "");
         let output = /^[*/() ]+$/.test(str);
         return output;
     }
@@ -78,7 +79,9 @@ export default function Factores({ equation, changeCurrentFactor }) {
     function multDiv(str) {
         let eq = str;
         let eqFiltrado = eliminarGrupoParentesis(eq);
+        eqFiltrado = eqFiltrado.replaceAll("^()", "");
         let output = eqFiltrado.split(/[*/+-]+/);
+        //console.log("output", output);
         let outputFiltrado = [];
         for (let i = 0; i < output.length; i++) {
             if (!noMatematico(output[i])) {  //Es decir, si es un término matemático
@@ -176,15 +179,16 @@ export default function Factores({ equation, changeCurrentFactor }) {
         
         //Aqui empieza el intento para hacer que todos sean factores bonitos
         for(let m = 0; m<gruposFiltrado3.length; m++){
-            gruposFiltrado3[m] = gruposFiltrado3[m].replace("abs", "");  //Se eliminan los valores absolutos, para permitir las raices cuadradas
+            gruposFiltrado3[m] = gruposFiltrado3[m].replaceAll("abs", "");  //Se eliminan los valores absolutos, para permitir las raices cuadradas
             //nerdamer(gruposFiltrado3[m]).text('fractions') se encarga de que el programa no convierta las cosas a decimal
             //La función convertToLaTeX() básicamente lo que hace es convertir a un formato de latex donde 
             // agarra la convención de poner ^(-1) de nerdamer, y transformar a \frac{}{} de laTeX
             gruposFiltrado3[m] = nerdamer.convertToLaTeX(nerdamer(gruposFiltrado3[m]).text('fractions'));
-            gruposFiltrado3[m] = gruposFiltrado3[m].replace("^{1}", ""); //Eliminar los a la uno redundantes
+            gruposFiltrado3[m] = gruposFiltrado3[m].replaceAll("^{1}", ""); //Eliminar los a la uno redundantes
             console.log(gruposFiltrado3[m]);
         }
         console.log("gruposFiltrado3", gruposFiltrado3);
+        console.log("sin repetir", [...new Set(gruposFiltrado3)]);
         // Aquí termina el arreglo
         setEquationFactors([...new Set(gruposFiltrado3)]); //Para eliminar términos repetidos
     }
