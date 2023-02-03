@@ -158,7 +158,7 @@ export default function Factores({ equation, changeCurrentFactor }) {
         // Ahora revisar que no queden paréntesis "()" vacíos
         var gruposFiltrado2 = [];
         for (let k = 0; k < gruposFiltrado.length; k++) {
-            if (!gruposFiltrado[k].includes("()")) {
+            if (!gruposFiltrado[k].includes("()") && gruposFiltrado[k]!="0") {   // Se agrega un seguro para impedir que "0" sea un factor 
                 gruposFiltrado2.push(gruposFiltrado[k].replaceAll(/\s/g, '')); //Se eliminan los espacios en blanco
             }
         }
