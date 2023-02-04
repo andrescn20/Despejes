@@ -55,10 +55,12 @@ class Equation {
 
   mult(a) {
     //Multiplica el argumento
+    console.log('a', a);
     this.eqLeft = nerdamer('(' + this.eqLeft + ')*(' + a + ')');
     this.eqRight = nerdamer('(' + this.eqRight + ')*(' + a + ')');
     this.eq = this.eqLeft + '=' + this.eqRight;
     this.Latex = nerdamer(this.eq).toTeX();
+    console.log("this.Latex", this.Latex);
   }
 
   div(a) {

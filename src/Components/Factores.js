@@ -150,6 +150,8 @@ export default function Factores({ equation, changeCurrentFactor }) {
             grupos = grupos.concat(gruposMultDiv);
             grupos = grupos.concat(gruposFracciones);
         }
+
+        console.log("grupos", grupos);
         // Eliminar parentesis vacíos
         var gruposFiltrado = [];
         for (let j = 0; j < grupos.length; j++) {
@@ -161,7 +163,7 @@ export default function Factores({ equation, changeCurrentFactor }) {
         // Ahora revisar que no queden paréntesis "()" vacíos
         var gruposFiltrado2 = [];
         for (let k = 0; k < gruposFiltrado.length; k++) {
-            if (!gruposFiltrado[k].includes("()") && gruposFiltrado[k]!="0") {   // Se agrega un seguro para impedir que "0" sea un factor 
+            if (!gruposFiltrado[k].includes("()") && gruposFiltrado[k] != "0" && gruposFiltrado[k].split("(").length - 1 === gruposFiltrado[k].split(")").length - 1) {   // Se agrega un seguro para impedir que "0" sea un factor 
                 gruposFiltrado2.push(gruposFiltrado[k].replaceAll(/\s/g, '')); //Se eliminan los espacios en blanco
             }
         }
@@ -175,17 +177,23 @@ export default function Factores({ equation, changeCurrentFactor }) {
         gruposFiltrado2.push("7");
         gruposFiltrado2.push("8");
         gruposFiltrado2.push("9");
-        let gruposFiltrado3 = gruposFiltrado2.filter(x => x !== undefined); //Se eliminan los grupos undefined
+
+        console.log("gruposFiltrado2", gruposFiltrado2);
+        let gruposFiltrado3 = gruposFiltrado2.filter(x => x !== undefined ); //Se eliminan los grupos undefined
+        
+        console.log("gruposFiltrado3 original", gruposFiltrado3);
         
         //Aqui empieza el intento para hacer que todos sean factores bonitos
+        console.log("gruposFiltrado3.length", gruposFiltrado3.length);
         for(let m = 0; m<gruposFiltrado3.length; m++){
             gruposFiltrado3[m] = gruposFiltrado3[m].replaceAll("abs", "");  //Se eliminan los valores absolutos, para permitir las raices cuadradas
+            
             //nerdamer(gruposFiltrado3[m]).text('fractions') se encarga de que el programa no convierta las cosas a decimal
             //La función convertToLaTeX() básicamente lo que hace es convertir a un formato de latex donde 
             // agarra la convención de poner ^(-1) de nerdamer, y transformar a \frac{}{} de laTeX
             gruposFiltrado3[m] = nerdamer.convertToLaTeX(nerdamer(gruposFiltrado3[m]).text('fractions'));
             gruposFiltrado3[m] = gruposFiltrado3[m].replaceAll("^{1}", ""); //Eliminar los a la uno redundantes
-            console.log(gruposFiltrado3[m]);
+            //console.log("gruposFiltrado3", m, gruposFiltrado3[m]);
         }
         console.log("gruposFiltrado3", gruposFiltrado3);
         console.log("sin repetir", [...new Set(gruposFiltrado3)]);
