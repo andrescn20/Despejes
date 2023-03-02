@@ -65,10 +65,6 @@ function App() {
   //Cada vez que cambia la ecuación actual, se agrega al historial,
   useEffect(() => {}, [history]);
 
-  // useEffect(() => {
-  //   console.log(equation);
-  // }, [equation]);
-
   useEffect(() => {
     setEquation(history[history.length - 1]);
   }, [history]);
@@ -90,6 +86,11 @@ function App() {
   const handleOperation = (modifiedEquation) => {
     setHistory((history) => [...history, modifiedEquation]);
   };
+  const handlePredefinedEquation = (equation) => {
+    setChangingEquation(equation);
+    setHistory((history) => [...history, equation]);
+  };
+
   const cambiarModo = () => {
     setFreeMode((isFreeMode) => !isFreeMode);
   };
@@ -115,7 +116,7 @@ function App() {
       return (
         <Predefinidas
           submitEquation={submitEquation}
-          handleEquationChange={handleEquationChange}
+          handlePredefinedEquation={handlePredefinedEquation}
           equation={equation}
           goBack={goBack}
           clearEquation={clearEquation}
@@ -135,8 +136,7 @@ function App() {
       <Header />
       <div className='grow justify-center'>
         <button onClick={cambiarModo}>Cambiar modo</button>
-        {/*Contenedor principal de funcionalidad */}
-        <div className='grid grid-cols-4 items-center gap-4 my-12 px-12'>
+        <div className='grid grid-cols-4 items-center gap-4 px-12'>
           {funcionalidad()}
         </div>
       </div>
