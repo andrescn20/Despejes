@@ -10,7 +10,7 @@ export default function InputField({ equation }) {
   const currentEquation = new Equation(equation);
   currentEquation.setEquation();
   useEffect(() => {
-    console.log(equation);
+    // console.log(equation);
   }, [equation]);
 
   return (

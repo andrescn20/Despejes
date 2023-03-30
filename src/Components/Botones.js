@@ -16,7 +16,7 @@ export default function Botones({ sendCurrentOperation, factores }) {
     let factorBtns = Array.from(document.getElementsByClassName('factor'));
     factorBtns.forEach((btn) => {
       if (btn.value === btnActual.value) {
-        console.log(btnActual.value);
+        // console.log(btnActual.value);
         btnActual.setAttribute('id', 'activeFactor');
       } else {
         btn.removeAttribute('id');
