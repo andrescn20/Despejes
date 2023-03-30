@@ -3,12 +3,13 @@ import Libre from './Components/Libre';
 import Predefinidas from './Components/Predefinidas';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import { InlineMath } from 'react-katex';
 
 function App() {
   const initialEquation = 'x_f - x_i = v_i*t+(1/2)(a)(t^2)';
   const initialVariable = 'a';
 
-  const [apiTest, setApiTest] = useState();
+  const [suma, setSuma] = useState('');
   //Determina le ecuación inicial
   const [equation, setEquation] = useState(initialEquation);
 
@@ -70,14 +71,21 @@ function App() {
   }, [history]);
 
   useEffect(() => {
-    fetch("/test").then(
-      res => res.json()
-    ).then(
-      apiTest => {
-        setApiTest(apiTest)
-        console.log(apiTest.test)
-      }
-    )
+
+    fetch('/suma', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        { equation : '\\frac {1 + \\sqrt {\\a}} {\\b} = x^2', factor : 'b' })
+    })
+      .then(response => response.json())
+      .then(data => {
+        setSuma(data);
+        console.log(data)
+      });
+
   }, []);
 
 
@@ -146,8 +154,8 @@ function App() {
   return (
     <div className='flex flex-col'>
       <Header />
-      <div>
-      {apiTest.test}
+      <div className='w-full p-12 text-center'>
+      <InlineMath math={suma.result}/>
       </div>
       <div className='grow justify-center'>
         <button onClick={cambiarModo}>Cambiar modo</button>
