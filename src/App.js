@@ -8,6 +8,7 @@ function App() {
   const initialEquation = 'x_f - x_i = v_i*t+(1/2)(a)(t^2)';
   const initialVariable = 'a';
 
+  const [apiTest, setApiTest] = useState();
   //Determina le ecuación inicial
   const [equation, setEquation] = useState(initialEquation);
 
@@ -63,11 +64,22 @@ function App() {
     }
   };
   //Cada vez que cambia la ecuación actual, se agrega al historial,
-  useEffect(() => {}, [history]);
 
   useEffect(() => {
     setEquation(history[history.length - 1]);
   }, [history]);
+
+  useEffect(() => {
+    fetch("/test").then(
+      res => res.json()
+    ).then(
+      apiTest => {
+        setApiTest(apiTest)
+        console.log(apiTest.test)
+      }
+    )
+  }, []);
+
 
   //Actualiza la variable actual
   const submitVariable = (e) => {
@@ -134,6 +146,9 @@ function App() {
   return (
     <div className='flex flex-col'>
       <Header />
+      <div>
+      {apiTest.test}
+      </div>
       <div className='grow justify-center'>
         <button onClick={cambiarModo}>Cambiar modo</button>
         <div className='grid grid-cols-4 items-center gap-4 px-12'>
