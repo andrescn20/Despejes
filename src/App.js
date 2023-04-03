@@ -6,10 +6,9 @@ import Footer from './Components/Footer';
 import { InlineMath } from 'react-katex';
 
 function App() {
-  const initialEquation = 'x_f - x_i = v_i*t+(1/2)(a)(t^2)';
-  const initialVariable = 'a';
+  const initialEquation = 'v = \\frac{d}{t}';
+  const initialVariable = 'd';
 
-  const [suma, setSuma] = useState('');
   //Determina le ecuación inicial
   const [equation, setEquation] = useState(initialEquation);
 
@@ -69,25 +68,6 @@ function App() {
   useEffect(() => {
     setEquation(history[history.length - 1]);
   }, [history]);
-
-  useEffect(() => {
-
-    fetch('/suma', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(
-        { equation : '\\frac {1 + \\sqrt {\\a}} {\\b} = x^2', factor : 'b' })
-    })
-      .then(response => response.json())
-      .then(data => {
-        setSuma(data);
-        console.log(data)
-      });
-
-  }, []);
-
 
   //Actualiza la variable actual
   const submitVariable = (e) => {
@@ -155,7 +135,7 @@ function App() {
     <div className='flex flex-col'>
       <Header />
       <div className='w-full p-12 text-center'>
-      <InlineMath math={suma.result}/>
+        <InlineMath math={suma.result} />
       </div>
       <div className='grow justify-center'>
         <button onClick={cambiarModo}>Cambiar modo</button>
