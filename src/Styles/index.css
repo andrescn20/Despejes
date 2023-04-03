@@ -6,21 +6,7 @@
   box-shadow: inset 3px 3px 5px -2px rgba(0, 0, 0, 0.746);
 }
 
-.activeFactor {
-  box-shadow: inset 3px 3px 5px -2px rgba(0, 0, 0, 0.746);
-}
-
 h2 {
   font-size: 1.5rem;
   font-weight: 500;
 }
-
-/* html {
-  height: 100%;
-}
-body {
-  height: 100%;
-}
-#root {
-  height: 100%;
-} */
