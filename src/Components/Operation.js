@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Operacion from '../Operacion';
 
-export default function Sumar({ equation, name, handleOperation, factor }) {
+export default function Operation({ equation, name, handleOperation, factor }) {
   const [newEquation, setNewEquation] = useState('');
 
   useEffect(() => {
@@ -15,7 +14,7 @@ export default function Sumar({ equation, name, handleOperation, factor }) {
   const updateEquation = (e) => {
     e.preventDefault();
 
-    fetch('/Sumar', {
+    fetch(`/${name}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +32,14 @@ export default function Sumar({ equation, name, handleOperation, factor }) {
 
   return (
     <form onSubmit={updateEquation}>
-      <Operacion text={name} />
+      <div className='flex'>
+        <button
+          type='submit'
+          className='rounded-lg w-24 py-1 shadow-sm shadow-gray-500 self-center  my-1 active:activeFactor'
+        >
+          {name}
+        </button>
+      </div>
     </form>
   );
 }

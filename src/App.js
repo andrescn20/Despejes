@@ -3,10 +3,11 @@ import Libre from './Components/Libre';
 import Predefinidas from './Components/Predefinidas';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import { InlineMath } from 'react-katex';
 
 function App() {
-  const initialEquation = 'x_f - x_i = v_i*t+(1/2)(a)(t^2)';
-  const initialVariable = 'a';
+  const initialEquation = 'v = \\frac{d}{t}';
+  const initialVariable = 'd';
 
   //Determina le ecuación inicial
   const [equation, setEquation] = useState(initialEquation);
@@ -63,7 +64,6 @@ function App() {
     }
   };
   //Cada vez que cambia la ecuación actual, se agrega al historial,
-  useEffect(() => {}, [history]);
 
   useEffect(() => {
     setEquation(history[history.length - 1]);

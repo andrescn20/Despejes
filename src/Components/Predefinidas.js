@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
 import InputField from './InputField';
-import Sumar from './Operaciones/Sumar';
-import Restar from './Operaciones/Restar';
-import Multiplicar from './Operaciones/Multiplicar';
 import RevisionContainer from './RevisionContainer';
-import Dividir from './Operaciones/Dividir';
-import Potencia from './Operaciones/Potencia';
-import Raiz from './Operaciones/Raiz';
-import Factores from './Factores';
 import Boton from './Boton';
-import Simplificar from './Operaciones/Simplificar';
-import Expandir from './Operaciones/Expandir';
-import EquationList from '../ecuacionesArray';
+import AppData from '../AppData';
 import { InlineMath } from 'react-katex';
+import PredefinedFactors from './PredefinedFactors';
+import Operation from './Operation';
 
 export default function Libre({
   equation,
@@ -26,9 +19,12 @@ export default function Libre({
   handleVariableChange,
   handlePredefinedEquation,
 }) {
-  const [equationList, setEquationList] = useState(EquationList);
+  const [equationList, setEquationList] = useState(AppData.equationsList);
   const [toggleMenu, setToggleMenu] = useState(false);
   const [toggleNumbers, setToggleNumbers] = useState(false);
+  const [factorList, setFactorList] = useState(['v', 'd', 't']);
+  const [variables, setVariables] = useState([]);
+  const [operationsList] = useState(AppData.operationsList);
 
   const dropdown = () => {
     setToggleMenu(!toggleMenu);
@@ -38,14 +34,27 @@ export default function Libre({
   };
   const setPredefinedEquation = (ecuacion) => {
     dropdown();
-    handlePredefinedEquation(ecuacion);
+    setFactorList(ecuacion.factores);
+    setVariables(ecuacion.variables);
+    handlePredefinedEquation(ecuacion.ecuacion);
   };
+  const displayOperations = operationsList.map((operation) => {
+    return (
+      <Operation
+        className='self-center'
+        name={operation}
+        handleOperation={handleOperation}
+        equation={equation}
+        factor={currentFactor}
+      />
+    );
+  });
 
   const displayEquations = equationList.map((element, index) => {
     return (
       <li>
         <button
-          onClick={() => setPredefinedEquation(element.ecuacion)}
+          onClick={() => setPredefinedEquation(element)}
           className='w-full px-4 py-3 bg-white shadow-md shadow-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
         >
           <InlineMath math={element.ecuacion} />
@@ -99,60 +108,12 @@ export default function Libre({
         </div>
       </div>
       <div className='grid grid-cols-3 justify-center gap-2 col-span-2 row-span-2 col-start-3'>
-        <Sumar
-          className='self-center'
-          name={'Sumar'}
-          handleOperation={handleOperation}
-          equation={equation}
-          factor={currentFactor}
-        />
-        <Restar
-          name={'Restar'}
-          handleOperation={handleOperation}
-          equation={equation}
-          factor={currentFactor}
-        />
-        <Multiplicar
-          name={'Multiplicar'}
-          handleOperation={handleOperation}
-          equation={equation}
-          factor={currentFactor}
-        />
-        <Dividir
-          name={'Dividir'}
-          handleOperation={handleOperation}
-          equation={equation}
-          factor={currentFactor}
-        />
-        <Potencia
-          name={'Potencia'}
-          handleOperation={handleOperation}
-          equation={equation}
-          factor={currentFactor}
-        />
-        <Raiz
-          name={'Raiz'}
-          handleOperation={handleOperation}
-          equation={equation}
-          factor={currentFactor}
-        />
-        <Simplificar
-          name={'Simplificar'}
-          handleOperation={handleOperation}
-          equation={equation}
-          factor={currentFactor}
-        />
-        <Expandir
-          name={'Expandir'}
-          handleOperation={handleOperation}
-          equation={equation}
-          factor={currentFactor}
-        />
+        {displayOperations}
       </div>
       <div className='col-span-2 col-start-1 row-span-2'>
-        <Factores
-          equation={equation}
+        <PredefinedFactors
           changeCurrentFactor={changeCurrentFactor}
+          factorList={factorList}
         />
       </div>
       <div className='flex justify-center my-6 col-span-2 row-span-3 col-start-3 row-start-3'>

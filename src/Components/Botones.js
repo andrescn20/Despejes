@@ -1,41 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
-import nerdamer from 'nerdamer';
 
 export default function Botones({ sendCurrentOperation, factores }) {
-  // const [operationList, setOperationList] = useState([]);
+  const [btnActual, setBtnActual] = useState([]);
 
   const handleClick = (e) => {
     let currentOperation = e.target.value;
     sendCurrentOperation(currentOperation);
-    updateFocus(e.target);
+    setBtnActual(e.target);
   };
 
-  const updateFocus = (btnActual) => {
+  useEffect(() => {
     let factorBtns = Array.from(document.getElementsByClassName('factor'));
     factorBtns.forEach((btn) => {
       if (btn.value === btnActual.value) {
-        console.log(btnActual.value);
+        console.log(btnActual);
         btnActual.setAttribute('id', 'activeFactor');
       } else {
+        console.log(btn);
         btn.removeAttribute('id');
       }
     });
-
-    // botones.forEach(btn => {
-    //   if(btn.key == btnActual.value){
-    //     console.log(btnActual)
-    //     btnActual.classList.add('activeFactor')
-    //   }else{
-    //     console.log(btn);
-    //     // btn.classList.remove('btnFactor')
-    //   }
-    //  });
-  };
-  // const operationArray = factores.map((factor) => {
-  //   return factor;
-  // });
+  }, [btnActual]);
 
   const botones = factores.map((factor) => {
     if (factor === '') {
@@ -48,8 +35,8 @@ export default function Botones({ sendCurrentOperation, factores }) {
           </div>
           <button
             onClick={handleClick}
-            key={factor}
-            value={nerdamer.convertFromLaTeX(factor)}
+            key={`${new Date().getTime()}${factor}`}
+            value={factor}
             className='h-full w-full absolute top-0 left-0 z-30 factor rounded-lg shadow-sm shadow-gray-500'
           ></button>
         </div>
@@ -60,26 +47,3 @@ export default function Botones({ sendCurrentOperation, factores }) {
     <div className='flex justify-center flex-wrap gap-4 px-8'>{botones}</div>
   );
 }
-
-// function parentesis(string) {
-//   let grupos = [];
-//   let extract = ExtractParents.extract(string);
-//   grupos.forEach((grupo, i) => {
-//     //Grupos grandes
-//     grupos.push(grupo.str);
-//     extract.forEach((extract, j) => {
-//       //Paréntesis dentro de parentesis
-//       grupos.push(extract[i].nest[j].str);
-//     });
-//   });
-
-// function eliminarGrupoParentesis(string) {
-//   let gruposFiltrado;
-//   let eq = string;
-//   let grupos = parentesis(eq); //Se extraen los grupos
-//   grupos.forEach((grupo) => {
-//     gruposFiltrado = eq.replace(grupo, '');
-//     eq = gruposFiltrado;
-//   });
-//   return eq;
-// }

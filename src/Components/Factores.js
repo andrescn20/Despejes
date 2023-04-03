@@ -155,7 +155,7 @@ export default function Factores({ equation, changeCurrentFactor }) {
       grupos = grupos.concat(gruposFracciones);
     }
 
-    console.log('grupos', grupos);
+    // console.log('grupos', grupos);
     // Eliminar parentesis vacíos
     var gruposFiltrado = [];
     for (let j = 0; j < grupos.length; j++) {
@@ -189,13 +189,13 @@ export default function Factores({ equation, changeCurrentFactor }) {
     gruposFiltrado2.push('8');
     gruposFiltrado2.push('9');
 
-    console.log('gruposFiltrado2', gruposFiltrado2);
+    // console.log('gruposFiltrado2', gruposFiltrado2);
     let gruposFiltrado3 = gruposFiltrado2.filter((x) => x !== undefined); //Se eliminan los grupos undefined
 
-    console.log('gruposFiltrado3 original', gruposFiltrado3);
+    // console.log('gruposFiltrado3 original', gruposFiltrado3);
 
     //Aqui empieza el intento para hacer que todos sean factores bonitos
-    console.log('gruposFiltrado3.length', gruposFiltrado3.length);
+    // console.log('gruposFiltrado3.length', gruposFiltrado3.length);
     for (let m = 0; m < gruposFiltrado3.length; m++) {
       gruposFiltrado3[m] = gruposFiltrado3[m].replaceAll('abs', ''); //Se eliminan los valores absolutos, para permitir las raices cuadradas
 
@@ -208,8 +208,8 @@ export default function Factores({ equation, changeCurrentFactor }) {
       gruposFiltrado3[m] = gruposFiltrado3[m].replaceAll('^{1}', ''); //Eliminar los a la uno redundantes
       //console.log("gruposFiltrado3", m, gruposFiltrado3[m]);
     }
-    console.log('gruposFiltrado3', gruposFiltrado3);
-    console.log('sin repetir', [...new Set(gruposFiltrado3)]);
+    // console.log('gruposFiltrado3', gruposFiltrado3);
+    // console.log('sin repetir', [...new Set(gruposFiltrado3)]);
     // Aquí termina el arreglo
     setEquationFactors([...new Set(gruposFiltrado3)]); //Para eliminar términos repetidos
   }
