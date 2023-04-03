@@ -97,10 +97,10 @@ export default function Libre({
         />
       </div>
       <div className='col-span-2 col-start-1 row-span-2'>
-        <Factores
+        {/* <Factores
           equation={equation}
           changeCurrentFactor={changeCurrentFactor}
-        />
+        /> */}
       </div>
       <div className='flex justify-center my-6 col-span-2 row-span-3 col-start-3 row-start-3'>
         <RevisionContainer
