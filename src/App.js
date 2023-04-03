@@ -134,9 +134,6 @@ function App() {
   return (
     <div className='flex flex-col'>
       <Header />
-      <div className='w-full p-12 text-center'>
-        <InlineMath math={suma.result} />
-      </div>
       <div className='grow justify-center'>
         <button onClick={cambiarModo}>Cambiar modo</button>
         <div className='grid grid-cols-4 items-center gap-4 px-12'>
