@@ -1,19 +1,34 @@
-import React from 'react';
-import Equation from '../despejes';
+import React, { useEffect, useState } from 'react';
 import Operacion from '../Operacion';
 
 export default function Sumar({ equation, name, handleOperation, factor }) {
-  const currentEquation = new Equation(equation);
+  const [newEquation, setNewEquation] = useState('');
+
+  useEffect(() => {
+    setNewEquation(equation);
+  }, []);
+
+  useEffect(() => {
+    handleOperation(newEquation);
+  }, [newEquation]);
 
   const updateEquation = (e) => {
     e.preventDefault();
-    
-    //Este es el codigo que vamos a cambiar por requests a la api
-    currentEquation.setEquation();
-    currentEquation.suma(factor);
-    //Hasta aca
 
-    handleOperation(currentEquation.eq);
+    fetch('/Sumar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        equation: newEquation,
+        factor: factor,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setNewEquation(data.result);
+      });
   };
 
   return (
