@@ -14,14 +14,15 @@ export default function Operation({ equation, name, handleOperation, factor }) {
   const updateEquation = (e) => {
     e.preventDefault();
 
-    fetch(`/${name}`, {
+    fetch(`https://proyectnewton.andrescn20.com/${name}`, {
       method: 'POST',
+      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        equation: newEquation,
-        factor: factor,
+        equation: "a = 0",
+        factor: "b",
       }),
     })
       .then((response) => response.json())
