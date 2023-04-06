@@ -14,15 +14,14 @@ export default function Operation({ equation, name, handleOperation, factor }) {
   const updateEquation = (e) => {
     e.preventDefault();
 
-    fetch(`https://proyectnewton.andrescn20.com/${name}`, {
+    fetch(`https://projectnewtonapi.andrescn20.com/${name}`, {
       method: 'POST',
-      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        equation: "a = 0",
-        factor: "b",
+        equation: equation,
+        factor: factor,
       }),
     })
       .then((response) => response.json())
