@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function Operation({ equation, name, handleOperation, factor }) {
+export default function Operation({ equation, name, handleOperation, factor, symbol }) {
   const [newEquation, setNewEquation] = useState('');
 
   useEffect(() => {
@@ -14,13 +14,13 @@ export default function Operation({ equation, name, handleOperation, factor }) {
   const updateEquation = (e) => {
     e.preventDefault();
 
-    fetch(`/${name}`, {
+    fetch(`https://projectnewtonapi.andrescn20.com/${name}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        equation: newEquation,
+        equation: equation,
         factor: factor,
       }),
     })
@@ -32,12 +32,12 @@ export default function Operation({ equation, name, handleOperation, factor }) {
 
   return (
     <form onSubmit={updateEquation}>
-      <div className='flex'>
+      <div >
         <button
           type='submit'
           className='rounded-lg w-24 py-1 shadow-sm shadow-gray-500 self-center  my-1 active:activeFactor'
         >
-          {name}
+          {symbol}
         </button>
       </div>
     </form>

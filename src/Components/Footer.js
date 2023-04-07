@@ -2,8 +2,8 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className='bg-slate-200 flex justify-around h-10 items-center fixed bottom-0 w-full'>
-      <p className='flex align-center'>Created By:</p>
+    <footer className='bg-black/5 flex justify-around h-14 items-center fixed bottom-0 w-full border-t'>
+      <p className='flex align-center text-sm'>Created By:</p>
       <a href='https://github.com/andrescn20' className='flex gap-2'>
         <p>
           <strong> andrescn20 </strong>
