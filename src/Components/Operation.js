@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function Operation({ equation, name, handleOperation, factor }) {
+export default function Operation({ equation, name, handleOperation, factor, symbol }) {
   const [newEquation, setNewEquation] = useState('');
 
   useEffect(() => {
@@ -32,12 +32,12 @@ export default function Operation({ equation, name, handleOperation, factor }) {
 
   return (
     <form onSubmit={updateEquation}>
-      <div className='flex'>
+      <div >
         <button
           type='submit'
           className='rounded-lg w-24 py-1 shadow-sm shadow-gray-500 self-center  my-1 active:activeFactor'
         >
-          {name}
+          {symbol}
         </button>
       </div>
     </form>
