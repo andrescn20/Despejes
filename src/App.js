@@ -28,7 +28,7 @@ function App() {
   const [history, setHistory] = useState([initialEquation]);
 
   //Modo: Predefinidas vs Libre
-  const [isFreeMode, setFreeMode] = useState(false);
+  const [activeMode, setActiveMode] = useState('classic');
 
   //Actualiza la operación actual a utilizar
   function changeCurrentFactor(currentFactor) {
@@ -91,12 +91,16 @@ function App() {
     setHistory((history) => [...history, equation]);
   };
 
-  const cambiarModo = () => {
-    setFreeMode((isFreeMode) => !isFreeMode);
+  const selectClassic= () => {
+    setActiveMode('classic');
   };
 
-  const funcionalidad = () => {
-    if (isFreeMode) {
+  const selectFree= () => {
+    setActiveMode('free');
+  };
+
+  const displayActiveMode = () => {
+    if (activeMode == 'free') {
       return (
         <Libre
           submitEquation={submitEquation}
@@ -112,7 +116,8 @@ function App() {
           handleVariableChange={handleVariableChange}
         />
       );
-    } else {
+    } 
+    if(activeMode == 'classic') {
       return (
         <Predefinidas
           submitEquation={submitEquation}
@@ -132,15 +137,19 @@ function App() {
   };
 
   return (
-    <div className='flex flex-col'>
-      <Header />
-      <div className='grow justify-center'>
-        <button onClick={cambiarModo}>Cambiar modo</button>
-        <div className='grid grid-cols-4 items-center gap-4 px-12'>
-          {funcionalidad()}
+    <div className='w-full items-center'>
+        <Header 
+        selectClassic={selectClassic}
+        selectFree={selectFree}
+        activeMode={activeMode}/>
+      <div className='mx-auto max-w-7xl'>
+        <div className=''>
+          <div className=''>
+            {displayActiveMode()}
+          </div>
         </div>
       </div>
-      <Footer />
+        <Footer />
     </div>
   );
 }
