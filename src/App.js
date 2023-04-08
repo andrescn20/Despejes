@@ -6,7 +6,7 @@ import Footer from './Components/Footer';
 import { InlineMath } from 'react-katex';
 
 function App() {
-  const initialEquation = 'v = \\frac{d}{t}';
+  const initialEquation = 'v = \\frac{d}{t}';  // Aquí tendremos que poner 'v=d/t'
   const initialVariable = 'd';
 
   //Determina le ecuación inicial
