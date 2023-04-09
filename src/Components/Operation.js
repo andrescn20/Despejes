@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-export default function Operation({ equation, name, handleOperation, factor, symbol }) {
-  const [newEquation, setNewEquation] = useState('');
+export default function Operation({ equation, name, updateEquation, factor, symbol }) {
 
-  useEffect(() => {
-    setNewEquation(equation);
-  }, []);
-
-  useEffect(() => {
-    handleOperation(newEquation);
-  }, [newEquation]);
-
-  const updateEquation = (e) => {
+  const sympyCalculation = (e) => {
     e.preventDefault();
 
     fetch(`https://projectnewtonapi.andrescn20.com/${name}`, {
@@ -26,16 +17,17 @@ export default function Operation({ equation, name, handleOperation, factor, sym
     })
       .then((response) => response.json())
       .then((data) => {
-        setNewEquation(data.result);
+        console.log(data)
+        updateEquation(data.latex , data.sympy);
       });
   };
 
   return (
-    <form onSubmit={updateEquation}>
-      <div >
+    <form onSubmit={sympyCalculation}>
+      <div className=''>
         <button
           type='submit'
-          className='rounded-lg w-24 py-1 shadow-sm shadow-gray-500 self-center  my-1 active:activeFactor'
+          className='bg-dark_2 text-light font-numbers rounded-lg w-16 mx-2 py-1 shadow-sm shadow-gray-500 self-center  my-1 active:activeFactor'
         >
           {symbol}
         </button>
