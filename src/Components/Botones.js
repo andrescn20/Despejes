@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 
-export default function Botones({ sendCurrentOperation, factores }) {
+export default function Botones({ setCurrentFactor, factors }) {
   const [btnActual, setBtnActual] = useState([]);
 
   const handleClick = (e) => {
     let currentOperation = e.target.value;
-    sendCurrentOperation(currentOperation);
+    setCurrentFactor(currentOperation);
     setBtnActual(e.target);
   };
 
@@ -18,18 +18,17 @@ export default function Botones({ sendCurrentOperation, factores }) {
         console.log(btnActual);
         btnActual.setAttribute('id', 'activeFactor');
       } else {
-        console.log(btn);
         btn.removeAttribute('id');
       }
     });
   }, [btnActual]);
 
-  const botones = factores.map((factor) => {
+  const botones = factors.map((factor) => {
     if (factor === '') {
       return null;
     } else {
       return (
-        <div className='relative rounded-2xl grow flex justify-center py-2 px-2'>
+        <div className='font-numbers bg-white rounded-2xl grow flex justify-center py-2 px-2'>
           <div className='text-slate-800 text-center items-center flex justify-center rounded-2xl scale-90'>
             <InlineMath math={factor} className='self-center font-md' />
           </div>
@@ -37,7 +36,7 @@ export default function Botones({ sendCurrentOperation, factores }) {
             onClick={handleClick}
             key={`${new Date().getTime()}${factor}`}
             value={factor}
-            className='h-full w-full absolute top-0 left-0 z-30 factor rounded-lg shadow-sm shadow-gray-500'
+            className='h-full w-full absolute top-0 left-0 factor rounded-lg shadow-sm shadow-gray-500'
           ></button>
         </div>
       );
