@@ -40,13 +40,16 @@ function App() {
         selectClassic={selectClassic}
         selectFree={selectFree}
         activeMode={activeMode}/>
-      <div className='mx-auto max-w-7xl grow'>
-        <div className=''>
-          <div className=''>
+      <div className='grow'>
             {displayActiveMode()}
-          </div>
-        </div>
       </div>
+      <div> FOR REVISION CONTAINER</div>
+      {/* <RevisionContainer
+          submitVariable={submitVariable}
+          handleVariableChange={handleVariableChange}
+          equation={equation}
+          variable={variable}
+        /> */}
         <Footer />
     </div>
   );

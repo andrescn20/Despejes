@@ -13,7 +13,7 @@ export default function Libre({}) {
   //Data:
   const [equationList] = useState(AppData.equationsList);
   const [factorList, setFactorList] = useState(
-    AppData.equationsList[0].factors
+    AppData.equationsList[0].equations[0].factors
   );
   const [basicOperationsList] = useState(AppData.operationsList.basic);
   const [helperOperationsList] = useState(AppData.operationsList.helpers);
@@ -21,24 +21,26 @@ export default function Libre({}) {
   //APP Logic
   const [history, setHistory] = useState([
     {
-      latex: AppData.equationsList[0].latex,
-      sympy: AppData.equationsList[0].sympy,
+      latex: AppData.equationsList[0].equations[0].latex,
+      sympy: AppData.equationsList[0].equations[0].sympy,
     },
   ]);
   const [latexEquation, setLatexEquation] = useState(
-    AppData.equationsList[0].latex
+    AppData.equationsList[0].equations[0].latex
   );
   const [currentFactor, setCurrentFactor] = useState();
-  const [variable, setVariable] = useState(AppData.equationsList[0].variable);
+  const [variable, setVariable] = useState(
+    AppData.equationsList[0].equations[0].variables[0]
+  );
   const [sympyEquation, setSympyEquation] = useState(
-    AppData.equationsList[0].sympy
+    AppData.equationsList[0].equations[0].sympy
   );
 
   //UX
   const [toggleMenu, setToggleMenu] = useState(false);
   const [toggleNumbers, setToggleNumbers] = useState(true);
 
-  let numbers = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, -1, 0,];
+  let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, -1, 0];
 
   //FUNCTIONS
 
@@ -123,8 +125,14 @@ export default function Libre({}) {
   });
 
   const displayNumbers = numbers.map((number) => {
-    return <button className="text-light font-numbers
-    border-[1px] rounded-md mx-2 my-1 py-2">{number}</button>;
+    return (
+      <button
+        className="text-light font-numbers
+    border-[1px] rounded-md mx-2 my-1 py-2"
+      >
+        {number}
+      </button>
+    );
   });
   const displayHelperOperations = helperOperationsList.map((operation) => {
     return (
@@ -138,16 +146,28 @@ export default function Libre({}) {
     );
   });
 
-  const displayEquations = equationList.map((element) => {
+  const displayEquations = (equations) => {
+    return equations.map(equation => {
+      return (
+        <li key={equation.latex}>
+          <button
+            onClick={() => updateHistory(equation)}
+            className="w-full px-4 py-3 bg-white shadow-md shadow-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+          >
+            <InlineMath math={equation.latex} />
+          </button>
+        </li>
+      );
+    })
+    
+  };
+
+  const displayCategories = equationList.map((cat) => {
     return (
-      <li key={element.ecuacion}>
-        <button
-          onClick={() => updateHistory(element)}
-          className="w-full px-4 py-3 bg-white shadow-md shadow-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-        >
-          <InlineMath math={element.latex} />
-        </button>
-      </li>
+      <ul>
+        <p className="bg-light">{cat.name}</p>
+        {displayEquations(cat.equations)}
+      </ul>
     );
   });
 
@@ -179,41 +199,41 @@ export default function Libre({}) {
 
   // COMPONENT RETURN STATEMENT
   return (
-    <>
-      <div className="flex flex-col items-center col-span-2 gap-4  row-span-3">
-        <div>
-          <button
-            onClick={dropdown}
-            className="text-light bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button"
+    <div className="items-center gap-4 grid grid-cols-12 h-full">
+      <div className="col-span-3 h-full">
+        <button
+          onClick={dropdown}
+          className={`text-dark_1 font-main font-bold bg-dark_green hover:bg-light hover:text-dark_2  w-full py-2 flex px-12 items-center justify-center ${
+            toggleMenu ? "rounded-tr-lg" : "rounded-r-lg"
+          }`}
+        >
+          ECUACIONES
+          <svg
+            className="w-4 h-4 ml-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            Ecuaciones
-            <svg
-              className="w-4 h-4 ml-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </button>
-          <div
-            id="dropdown"
-            className={` bg-white divide-y divide-gray-100 rounded-lg  w-44 dark:bg-gray-700 ${
-              toggleMenu ? "flex flex-col" : "hidden"
-            }`}
-          >
-            <ul className="py-2 text-sm absolute text-gray-700 dark:text-gray-200 z-50  border-blue-700">
-              {displayEquations}
-            </ul>
-          </div>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            ></path>
+          </svg>
+        </button>
+        <div
+          id="dropdown"
+          className={`w-full rounded-b-lg ${
+            toggleMenu ? "flex flex-col" : "hidden"
+          }`}
+        >
+          <ul className="text-sm bg-red-400">{displayCategories}</ul>
         </div>
+      </div>
+
+      <div className="col-span-6 col-start-5">
         <div className="grid grid-cols-5 w-full max-w-3xl">
           <div>
             <Boton onClick={goBack} text="Deshacer" isRed={true} />
@@ -234,20 +254,6 @@ export default function Libre({}) {
           <div className="grid grid-cols-2">{displayBasicOperations}</div>
         </div>
       </div>
-      <div className="col-span-2 col-start-1 row-span-2">
-        {/* <Botones
-          factors={factorList}
-          setCurrentFactor={updateCurrentFactor}
-        />  */}
-      </div>
-      <div className="flex justify-center my-6 col-span-2 row-span-3 col-start-3 row-start-3">
-        {/* <RevisionContainer
-          submitVariable={submitVariable}
-          handleVariableChange={handleVariableChange}
-          equation={equation}
-          variable={variable}
-        /> */}
-      </div>
-    </>
+    </div>
   );
 }
