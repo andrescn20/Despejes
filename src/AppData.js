@@ -61,6 +61,51 @@ const AppData = {
             variables: ["v_i", "g", "t", "2", "y_f", "y_i"],
             },
         ]},
+
+        {
+        name: 'Dinámica',
+        equations: [
+            {
+            sympy: "Eq(F, m * a)",
+            latex: "F = m \\cdot a",
+            factors: ["F", "m", "a"],
+            variables: ["m", "a"],
+            },
+            {
+            sympy: "Eq(W, m * g)",
+            latex: "W = m \\cdot g",
+            factors: ["W", "m", "g"],
+            variables: ["m", "g"],
+            },
+            {
+            sympy: "Eq(f, -k * x)",
+            latex: "f = - k\\cdot x",
+            factors: ["f", "k", "x"],
+            variables: ["k", "x"],
+            },
+        ]},
+        {
+        name: 'Gravitación',
+        equations: [
+            {
+            sympy: "Eq((r_1)**3/(T_1)**2, (r_2)**3/(T_2)**2)",
+            latex: "\\frac{r_1^3}{T_1^2} = \\frac{r_2^3}{T_2^2}",
+            factors: ["r_1^3", "T_1^2", "r_2^3", "T_2^2", "r_1", "r_2", "T_1", "T_2"],
+            variables: ["r_1", "r_2", "T_1", "T_2"], //v no es una variable, ¡Porque ya está despejada!
+            },
+            {
+            sympy: "Eq(F_g, G * m_1 * m_2/r**2)",
+            latex: "F_g = \\frac{G * m_1 * m_2}{r^2}",
+            factors: ["F_g", "G", "m_1", "m_2", "r"],
+            variables: ["G", "m_1", "m_2", "r"], //v no es una variable, ¡Porque ya está despejada!
+            },
+            {
+            sympy: "Eq(g, G * M/(R+h)**2)",
+            latex: "g = \\frac{G * M}{(R + h)^2}",
+            factors: ["g", "G", "M", "(R+h)", "R", "h"],
+            variables: ["G", "M", "R", "h"], //v no es una variable, ¡Porque ya está despejada!
+            },
+            ]},
       {name: 'Electromagnetismo',
       equations:[
         {
