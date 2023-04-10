@@ -39,6 +39,28 @@ const AppData = {
             variables: ["v_i", "v_f", "t"],
           },
         ]},
+        {
+        name: 'Caída libre',
+        equations: [
+            {
+            sympy: "Eq(v_f, v_i - g*t)",
+            latex: "v_f = v_i - g*t",
+            factors: ["v_f", "v_i", "g", "t", "g \\cdot t"],
+            variables: ["g", "v_i", "t"],
+            },
+            {
+            sympy: "Eq(v_f**2, v_i**2 - 2 * g * (y_f - y_i))",
+            latex: "v_f^2=v_i^2 - 2 \\cdot g \\cdot d",
+            factors: ["g", "v_f", "v_i", "y_f", "y_i", "(y_f-y_i)", "2", "v_f^2", "v_i^2", "g \\cdot d"],
+            variables: ["g", "v_f", "v_i", "y_f", "y_i"],
+            },
+            {
+            sympy: "Eq(y_f - y_i, v_i*t-g*t**2/2)",
+            latex: "y_f - y_i=v_i\\cdot t - \\frac{g\\cdot t^2}{2}",
+            factors: ["y_f", "y_i", "(y_f - y_i)", "v_i", "g", "t", "2", "v_i \\cdot t", "g \\cdot \\frac{t^2}{2}"],
+            variables: ["v_i", "g", "t", "2", "y_f", "y_i"],
+            },
+        ]},
       {name: 'Electromagnetismo',
       equations:[
         {
