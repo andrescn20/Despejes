@@ -67,10 +67,13 @@ const AppData = {
       { name: "Restar", symbol: "-" },
       { name: "Multiplicar", symbol: "x" },
       { name: "Dividir", symbol: "/" },
-      { name: "Potencia", symbol: "^" },
-      { name: "Raiz", symbol: "raiz" },
+      { name: "Potencia", symbol: "^"},
+      { name: "Raiz", symbol: <svg width="14" viewBox="0 0 19 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15.2223 0.191999H18.7023L11.3343 22.656H7.47025L3.43825 11.04H0.294252V8.136H6.19825L9.77425 19.128H9.03025L15.2223 0.191999Z" fill="#D9D9D9"/>
+      </svg>
+       },
     ],
-    helpers: [{name:"Simplificar" , symbol:"Simplificar"},{name: "Expandir", symbol:"Expandir"}],
+    helpers: [{name:"Simplificar" , symbol:"SIMPLIFICAR"},{name: "Expandir", symbol:"EXPANDIR"}],
   },
 };
 
