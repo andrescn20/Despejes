@@ -6,6 +6,7 @@ import AppData from "../AppData";
 import { InlineMath } from "react-katex";
 import Operation from "./Operation";
 import HelperOperation from "./HelperOperation";
+import FactorBtn from "./FactorBtn";
 
 export default function Libre({toggleLoading}) {
   //STATE VARIABLES
@@ -59,7 +60,7 @@ export default function Libre({toggleLoading}) {
     setCurrentFactor("v");
   };
 
-  useEffect(() => console.log(history));
+  // useEffect(() => console.log(history));
 
   const goBack = () => {
     if (history.length === 1) {
@@ -81,9 +82,9 @@ export default function Libre({toggleLoading}) {
     ]);
   };
 
-  const updateFactor = (e) => {
-    console.log(e.target.value);
-    setCurrentFactor(e.target.value);
+  const updateFactor = (factor) => {
+    console.log(factor);
+    setCurrentFactor(factor);
   };
 
   //Actualiza la variable actual
@@ -186,24 +187,13 @@ export default function Libre({toggleLoading}) {
     );
   });
 
+
   const factors = factorList.map((factor) => {
     if (factor === "") {
       return null;
     } else {
       return (
-        <div className="font-numbers text-lg font-light text-light flex justify-center py-2 px-2">
-          <button
-            onClick={updateFactor}
-            key={`${new Date().getTime()}${factor}`}
-            value={factor}
-            className={`hover:scale-105 px-4 py-2 factor border-[1px] border-light rounded-lg ${
-              factor == currentFactor ? "bg-green text-black" : ""
-            }`}
-          >
-            {/* <BlockMath math={factor}/> */}
-            {factor}
-          </button>
-        </div>
+        <FactorBtn latexFactor={factor.lx} sympyFactor={factor.sy} currentFactor={currentFactor} updateFactor={updateFactor}/>
       );
     }
   });
