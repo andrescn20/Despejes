@@ -18,6 +18,7 @@ module.exports = {
         header: '#162636', 
         header_b: '#0E1924',
         green: '#34F5C6',
+        dark_green: '#79C1B0',
         light: '#D9D9D9',
 
       },
