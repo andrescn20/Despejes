@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import InputField from "./InputField";
 import RevisionContainer from "./RevisionContainer";
-import Boton from "./Boton";
+import EquationsDropdown from "./EquationsDropdown";
 import AppData from "../AppData";
 import { InlineMath } from "react-katex";
 import Operation from "./Operation";
@@ -159,33 +159,7 @@ export default function Libre({toggleLoading}) {
     );
   });
 
-  const displayEquations = (equations) => {
-    return equations.map((equation, i) => {
-      return (
-        <li key={equation.latex}>
-          <button
-            onClick={() => updateHistory(equation)}
-            className={`w-full px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
-              i % 2 == 0 ? "bg-neutral-200" : "bg-white"
-            }`}
-          >
-            <InlineMath math={equation.latex} />
-          </button>
-        </li>
-      );
-    });
-  };
 
-  const displayCategories = equationList.map((cat) => {
-    return (
-      <ul>
-        <div className="bg-light_green text-dark_1 font-main py-2 px-4 font-semibold">
-          {cat.name}
-        </div>
-        {displayEquations(cat.equations)}
-      </ul>
-    );
-  });
 
 
   const factors = factorList.map((factor) => {
@@ -198,73 +172,16 @@ export default function Libre({toggleLoading}) {
     }
   });
 
-  const dropdownArrow = () => {
-    if (!toggleMenu) {
-      return (
-        <svg
-          className="w-4 h-4 ml-2"
-          viewBox="0 0 24 15"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M2.25 2.47499L12 12.525L21.75 2.47499"
-            stroke="#0B4C53"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      );
-    } else {
-      return (
-        <svg
-          className="w-4 h-4 ml-2"
-          viewBox="0 0 24 15"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M21.6792 12.6599L12.0697 2.47549L2.18108 12.3891"
-            stroke="#0B4C53"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      );
-    }
-  };
-
   // COMPONENT RETURN STATEMENT
   return (
     <div className="flex flex-col md:flex-row grow items-start gap-12">
-      <div className="h-full w-96">
-        <button
-          onClick={dropdown}
-          className={`text-dark_1 font-main font-bold bg-dark_green hover:text-white w-full py-2 flex px-12 items-center justify-center ${
-            toggleMenu ? "rounded-tr-lg" : "rounded-r-lg"
-          }`}
-        >
-          ECUACIONES
-          {dropdownArrow()}
-        </button>
-        <div
-          id="dropdown"
-          className={`w-full rounded-b-lg ${
-            toggleMenu ? "flex flex-col" : "hidden"
-          }`}
-        >
-          <ul className="text-sm bg-red-400">{displayCategories}</ul>
-        </div>
-      </div>
-
+      <EquationsDropdown toggleMenu={toggleMenu} dropdown={dropdown} equationList={equationList} updateHistory={updateHistory}/>
       <div className="flex flex-col grow ">
-          <div className="grid grid-cols-[1fr_minmax(300px,800px)_1fr] grid-rows-2 mr-4 ">
+          <div className="grid grid-cols-[1fr_minmax(300px,600px)_1fr] grid-rows-2 mr-4 ">
             <div className="mx-4 row-start-1 items-end col-start-2 flex relative z-20 ">
               {displayHelperOperations}
             </div>
-            <div className="row-start-2 col-start-2 flex grow justify-center relative z-30">
+            <div className="row-start-2 col-start-2 flex grow justify-center relative z-30 translate-x-6">
               <InputField equation={latexEquation} />
               <div className="flex flex-col gap-2 mt-2">
                 <button
