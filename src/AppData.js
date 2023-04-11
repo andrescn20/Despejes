@@ -296,7 +296,7 @@ const AppData = {
             name: "Electromagnetismo",
             equations: [
                 {
-                    sympy: "Eq(F , (k/r**2)(q_1))",
+                    sympy: "Eq(F , k*(q_1)*(q_2)/r**2)",
                     latex: "F = \\frac{k \\cdot  q_1 \\cdot q_2 }{r^2}",
                     factors: [{
                         lx: "F", sy: "F"
@@ -312,7 +312,7 @@ const AppData = {
                     variables: ["k", "q_1", "q_2", "r"], //v no es una variable, ¡Porque ya está despejada!
                 },
                 {
-                    sympy: "Eq(E , (k/r**2)(q))",
+                    sympy: "Eq(E , k*q/r**2)",
                     latex: "E = \\frac{k \\cdot  q }{r^2}",
                     factors: [{
                         lx: "E", sy: "E"
@@ -326,7 +326,7 @@ const AppData = {
                     variables: ["k", "q", "r"], //v no es una variable, ¡Porque ya está despejada!
                 },
                 {
-                    sympy: "Eq(V , (k/r)(q_1))",
+                    sympy: "Eq(V , k*q/r)",
                     latex: "V = \\frac{k \\cdot  q }{r}",
                     factors: [{
                         lx: "V", sy: "V"
@@ -340,7 +340,7 @@ const AppData = {
                     variables: ["k", "q", "r"], //v no es una variable, ¡Porque ya está despejada!
                 },
                 {
-                    sympy: "Eq(U , (k/r)(q_1*q_2))",
+                    sympy: "Eq(U , k*(q_1)*(q_2)/r)",
                     latex: "U = \\frac{k \\cdot  q_1 \\cdot q_2 }{r}",
                     factors: [{
                         lx: "U", sy: "U"
