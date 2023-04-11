@@ -91,8 +91,8 @@ const AppData = {
             equations: [
                 {
                     sympy: "Eq(v_f, v_i - g*t)",
-                    latex: "v_f = v_i - g*t",
-                    factors: ["v_f", "v_i", "g", "t", "g \\cdot t"],
+                    latex: "v_f = v_i - g \\cdot t",
+                    factors: [{ lx: "g", sy: "g" }, { lx: "v_f", sy: "v_f" }, { lx: "v_i", sy: "v_i" }, { lx: "t", sy: "t" }, { lx: "g \\cdot t", sy: "g * t"}],
                     variables: ["g", "v_i", "t"],
                 },
                 {
@@ -124,7 +124,7 @@ const AppData = {
                 },
                 {
                     sympy: "Eq(y_f - y_i, v_i*t-g*t**2/2)",
-                    latex: "y_f - y_i=v_i\\cdot t - \\frac{g\\cdot t^2}{2}",
+                    latex: "y_f - y_i=v_i \\cdot t - \\frac{g\\cdot t^2}{2}",
                     factors: [
                         {
                             lx:"y_f",sy: "y_f"},
@@ -225,13 +225,13 @@ const AppData = {
                 },
                 {
                     sympy: "Eq(F_g, G * m_1 * m_2/r**2)",
-                    latex: "F_g = \\frac{G * m_1 * m_2}{r^2}",
+                    latex: "F_g = \\frac{G \\cdot m_1 \\cdot m_2}{r^2}",
                     factors: [{lx: "F_g", sy: "(F_g)"},  {lx: "G", sy: "G"},   {lx: "m_1", sy: "(m_1)"}, {lx: "m_2", sy: "(m_2)"},  {lx: "r", sy: "r"}],
                     variables: ["G", "m_1", "m_2", "r"], //v no es una variable, ¡Porque ya está despejada!
                 },
                 {
                     sympy: "Eq(g, G * M/(R+h)**2)",
-                    latex: "g = \\frac{G * M}{(R + h)^2}",
+                    latex: "g = \\frac{G \\cdot M}{(R + h)^2}",
                     factors: [{lx: "g", sy: "g"},{
                     lx: "G", sy: "G"
                         }, {
@@ -248,7 +248,7 @@ const AppData = {
 
                 {
                     sympy: "Eq(G*M*m/r^2, m*V**2/r)",
-                    latex: "\\frac{G \\codt M \\cdot m}{r^2} = \\frac{m \\cdot \\V^2}{r}",
+                    latex: "\\frac{G \\cdot M \\cdot m}{r^2} = \\frac{m \\cdot V^2}{r}",
                     factors: [
                         {
                             lx: "G", sy: "G"
@@ -270,7 +270,7 @@ const AppData = {
                 },
                 {
                     sympy: "Eq(G*M*m/r^2, m*(2*pi*r/T)**2/r)",
-                    latex: "\\frac{G \\codt M \\cdot m}{r^2} = \\frac{m}{r} \\cdot \\bigg( \\frac{2 \\cdot \\pi \\cdot r}{T} \\bigg)^2",
+                    latex: "\\frac{G \\cdot M \\cdot m}{r^2} = \\frac{m}{r} \\cdot \\bigg( \\frac{2 \\cdot \\pi \\cdot r}{T} \\bigg)^2",
                     factors: [
                         {
                             lx: "G", sy: "G"
@@ -296,7 +296,7 @@ const AppData = {
             name: "Electromagnetismo",
             equations: [
                 {
-                    sympy: "Eq(F , (k/r**2)(q_1))",
+                    sympy: "Eq(F , k*(q_1)*(q_2)/r**2)",
                     latex: "F = \\frac{k \\cdot  q_1 \\cdot q_2 }{r^2}",
                     factors: [{
                         lx: "F", sy: "F"
@@ -312,7 +312,7 @@ const AppData = {
                     variables: ["k", "q_1", "q_2", "r"], //v no es una variable, ¡Porque ya está despejada!
                 },
                 {
-                    sympy: "Eq(E , (k/r**2)(q))",
+                    sympy: "Eq(E , k*q/r**2)",
                     latex: "E = \\frac{k \\cdot  q }{r^2}",
                     factors: [{
                         lx: "E", sy: "E"
@@ -326,7 +326,7 @@ const AppData = {
                     variables: ["k", "q", "r"], //v no es una variable, ¡Porque ya está despejada!
                 },
                 {
-                    sympy: "Eq(V , (k/r)(q_1))",
+                    sympy: "Eq(V , k*q/r)",
                     latex: "V = \\frac{k \\cdot  q }{r}",
                     factors: [{
                         lx: "V", sy: "V"
@@ -340,7 +340,7 @@ const AppData = {
                     variables: ["k", "q", "r"], //v no es una variable, ¡Porque ya está despejada!
                 },
                 {
-                    sympy: "Eq(U , (k/r)(q_1*q_2))",
+                    sympy: "Eq(U , k*(q_1)*(q_2)/r)",
                     latex: "U = \\frac{k \\cdot  q_1 \\cdot q_2 }{r}",
                     factors: [{
                         lx: "U", sy: "U"
