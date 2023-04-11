@@ -91,8 +91,8 @@ const AppData = {
             equations: [
                 {
                     sympy: "Eq(v_f, v_i - g*t)",
-                    latex: "v_f = v_i - g*t",
-                    factors: ["v_f", "v_i", "g", "t", "g \\cdot t"],
+                    latex: "v_f = v_i - g \\cdot t",
+                    factors: [{ lx: "g", sy: "g" }, { lx: "v_f", sy: "v_f" }, { lx: "v_i", sy: "v_i" }, { lx: "t", sy: "t" }, { lx: "g \\cdot t", sy: "g * t"}],
                     variables: ["g", "v_i", "t"],
                 },
                 {
@@ -124,7 +124,7 @@ const AppData = {
                 },
                 {
                     sympy: "Eq(y_f - y_i, v_i*t-g*t**2/2)",
-                    latex: "y_f - y_i=v_i\\cdot t - \\frac{g\\cdot t^2}{2}",
+                    latex: "y_f - y_i=v_i \\cdot t - \\frac{g\\cdot t^2}{2}",
                     factors: [
                         {
                             lx:"y_f",sy: "y_f"},
