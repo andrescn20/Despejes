@@ -225,13 +225,13 @@ const AppData = {
                 },
                 {
                     sympy: "Eq(F_g, G * m_1 * m_2/r**2)",
-                    latex: "F_g = \\frac{G * m_1 * m_2}{r^2}",
+                    latex: "F_g = \\frac{G \\cdot m_1 \\cdot m_2}{r^2}",
                     factors: [{lx: "F_g", sy: "(F_g)"},  {lx: "G", sy: "G"},   {lx: "m_1", sy: "(m_1)"}, {lx: "m_2", sy: "(m_2)"},  {lx: "r", sy: "r"}],
                     variables: ["G", "m_1", "m_2", "r"], //v no es una variable, ¡Porque ya está despejada!
                 },
                 {
                     sympy: "Eq(g, G * M/(R+h)**2)",
-                    latex: "g = \\frac{G * M}{(R + h)^2}",
+                    latex: "g = \\frac{G \\cdot M}{(R + h)^2}",
                     factors: [{lx: "g", sy: "g"},{
                     lx: "G", sy: "G"
                         }, {
