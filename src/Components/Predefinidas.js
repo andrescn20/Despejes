@@ -184,7 +184,7 @@ export default function Libre({toggleLoading}) {
 
   // COMPONENT RETURN STATEMENT
   return (
-    <div className="flex flex-col md:flex-row grow items-start gap-12">
+    <div className="flex flex-col md:flex-row grow items-start gap-12 max-w-7xl mx-auto">
       <EquationsDropdown toggleMenu={toggleMenu} dropdown={dropdown} equationList={equationList} updateHistory={updateHistory}/>
       {/* INPUT FIELD AND HELPERS */}
       <div className="flex flex-col md:grow md:mt-0 mt-12 w-full">
@@ -254,7 +254,7 @@ export default function Libre({toggleLoading}) {
             </div>
           </div>
         {/* FACTORS AND OPERATIONS */}
-        <div className="grow flex items-center justify-center">
+        <div className="grow flex items-center justify-center ">
           {/* FACTORS */}
           <div className="flex justify-center flex-wrap-reverse md:gap-4 px-8 my-2">
             {factors}
