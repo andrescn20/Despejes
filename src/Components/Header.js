@@ -18,9 +18,9 @@ const Header = ({selectClassic, selectFree, activeMode}) => {
         <div className='tracking-tight h-6 align-bottom font-light'>PROYECTO </div>
         <div className='tracking-widest flex  h-6 place-items-start font-bold capitalize'>NEWTON</div>
       </div>
-      <div className=''>
-        <button className={`mx-10  ${activeMode == 'classic' ? 'text-green text-md font-bold' : 'text-sm'}`} onClick={classic}>Modo Clásico</button>
-        <button className={`mx-10 ${activeMode == 'free' ? 'text-green text-md font-bold' : 'text-sm'}`} onClick={free}>Modo Libre</button>
+      <div className='flex flex-col items-start sm:flex-row'>
+        <button className={`mr-4 sm:mx-10  ${activeMode == 'classic' ? 'text-green text-md font-bold' : 'text-sm'}`} onClick={classic}>Modo Clásico</button>
+        <button className={`mr-4 sm:mx-10 ${activeMode == 'free' ? 'text-green text-md font-bold' : 'text-sm'}`} onClick={free}>Modo Libre</button>
       </div>
     </header>
   );

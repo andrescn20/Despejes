@@ -14,7 +14,7 @@ const FactorBtn = ({ latexFactor, sympyFactor,  currentFactor, updateFactor }) =
         onClick={triggerFactorUpdate}
         key={`${new Date().getTime()}`}
         value={sympyFactor}
-        className={`hover:scale-105 px-4 py-2 factor border-[1px] border-light rounded-lg ${
+        className={`hover:scale-105 px-2 py-1 sm:px-4 sm:py-2 factor border-[1px] border-light rounded-lg ${
           sympyFactor == currentFactor ? "bg-green text-black" : ""
         }`}
       >

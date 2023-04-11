@@ -47,16 +47,16 @@ const EquationsDropdown = ({
 
   const displayCategories = equationList.map((cat) => {
     return (
-        <Category equations={cat.equations} updateHistory={updateHistory} cat={cat}/>
+        <Category equations={cat.equations} updateHistory={updateHistory} cat={cat} dropdown={dropdown}/>
     );
   });
 
   return (
-    <div className="h-full w-96">
+    <div className="absolute z-40 md:relative md:h-full md:w-96 w-full">
       <button
         onClick={dropdown}
-        className={`text-dark_1 font-main font-bold bg-dark_green hover:text-white w-full py-2 flex px-12 items-center justify-center ${
-          toggleMenu ? "rounded-tr-lg" : "rounded-r-lg"
+        className={`text-dark_1 font-main font-bold bg-dark_green hover:text-white w-full py-2 flex px-12 items-center justify-center rounded-none ${
+          toggleMenu ? "md:rounded-tr-lg" : "md:rounded-r-lg"
         }`}
       >
         ECUACIONES

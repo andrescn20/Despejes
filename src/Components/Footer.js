@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-header flex justify-around h-20 items-center w-full border-t-2 border-header_b text-white">
+    <footer className="bg-header flex justify-around h-16 items-center w-full border-t-2 border-header_b text-white">
       <p className="flex align-center text-sm text-green">Created By:</p>
       <a href="https://github.com/andrescn20" className="flex gap-2 items-center">
         <p>
