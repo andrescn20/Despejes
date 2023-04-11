@@ -248,7 +248,7 @@ const AppData = {
 
                 {
                     sympy: "Eq(G*M*m/r^2, m*V**2/r)",
-                    latex: "\\frac{G \\codt M \\cdot m}{r^2} = \\frac{m \\cdot \\V^2}{r}",
+                    latex: "\\frac{G \\cdot M \\cdot m}{r^2} = \\frac{m \\cdot V^2}{r}",
                     factors: [
                         {
                             lx: "G", sy: "G"
@@ -270,7 +270,7 @@ const AppData = {
                 },
                 {
                     sympy: "Eq(G*M*m/r^2, m*(2*pi*r/T)**2/r)",
-                    latex: "\\frac{G \\codt M \\cdot m}{r^2} = \\frac{m}{r} \\cdot \\bigg( \\frac{2 \\cdot \\pi \\cdot r}{T} \\bigg)^2",
+                    latex: "\\frac{G \\cdot M \\cdot m}{r^2} = \\frac{m}{r} \\cdot \\bigg( \\frac{2 \\cdot \\pi \\cdot r}{T} \\bigg)^2",
                     factors: [
                         {
                             lx: "G", sy: "G"
