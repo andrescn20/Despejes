@@ -26,6 +26,10 @@ export default function Operation({
         console.log(data);
         toggleLoading(false);
         updateEquation(data.latex, data.sympy);
+      })
+      .catch((error) => {
+        toggleLoading(false);   
+        console.log(error);   
       });
   };
 
