@@ -177,8 +177,8 @@ export default function Libre({toggleLoading}) {
     <div className="flex flex-col md:flex-row grow items-start gap-12">
       <EquationsDropdown toggleMenu={toggleMenu} dropdown={dropdown} equationList={equationList} updateHistory={updateHistory}/>
       <div className="flex flex-col grow ">
-          <div className="grid grid-cols-[1fr_minmax(300px,600px)_1fr] grid-rows-2 mr-4 ">
-            <div className="mx-4 row-start-1 items-end col-start-2 flex relative z-20 ">
+          <div className="grid grid-cols-[1fr_minmax(300px,600px)_1fr] grid-rows- mr-4 ">
+            <div className="mx-4 row-start-1 items-end col-start-2 flex relative z-20 translate-x-4 ">
               {displayHelperOperations}
             </div>
             <div className="row-start-2 col-start-2 flex grow justify-center relative z-30 translate-x-6">
