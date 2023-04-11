@@ -41,7 +41,7 @@ export default function Libre({toggleLoading}) {
   const [toggleMenu, setToggleMenu] = useState(true);
   const [toggleNumbers, setToggleNumbers] = useState(true);
 
-  let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, -1, "=)", 0];
+  let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, -1, "", 0];
 
   //FUNCTIONS
 
@@ -83,8 +83,11 @@ export default function Libre({toggleLoading}) {
   };
 
   const updateFactor = (factor) => {
-    console.log(factor);
     setCurrentFactor(factor);
+  };
+
+  const updateNumericalFactor = (e) => {
+    updateFactor(e.target.value);
   };
 
   //Actualiza la variable actual
@@ -132,9 +135,10 @@ export default function Libre({toggleLoading}) {
   });
 
   const displayNumbers = numbers.map((number) => {
+    if(number !== ""){
     return (
       <button
-      onClick={updateFactor}
+      onClick={updateNumericalFactor}
       value={number}
         className={`text-light font-numbers
     border-[1px] rounded-md mx-2 my-1 py-2 w-16 hover:scale-105 ${
@@ -144,6 +148,8 @@ export default function Libre({toggleLoading}) {
         {number}
       </button>
     );
+  }
+  return <div></div>
   });
 
   const displayHelperOperations = helperOperationsList.map((operation) => {
