@@ -27,7 +27,7 @@ export default function Operation({ toggleLoading, equation, name, updateEquatio
       <div className=''>
         <button
           type='submit'
-          className='bg-dark_2 w-36 font-main text-xs py-2 mx-2 font-bold text-light translate-y-1 rounded-t-lg shadow-sm shadow-gray-500 self-center  active:activeFactor'
+          className='bg-dark_2 px-4 sm:w-32 font-main text-xs py-2 mx-2 font-bold text-light translate-y-1 rounded-t-lg shadow-sm shadow-gray-500 self-center  active:activeFactor'
         >
             {symbol}
         </button>
