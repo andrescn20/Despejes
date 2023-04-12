@@ -292,6 +292,140 @@ const AppData = {
                 },
             ],
         },
+        
+        {
+        name: "Energías",
+        equations:[
+            {
+            sympy: "Eq(K, m*v**2/2)",
+            latex: "K = \\frac{1}{2} m \\cdot v^2",
+            factors: [
+                {
+                    lx: "K", sy: "K"
+                },
+                {
+                    lx: "m", sy: "m"
+                },
+                {
+                    lx: "v", sy: "v"
+                },],
+            variables: ["m", "v"],
+            },
+            {
+            sympy: "Eq(U_g, m*g*y)",
+            latex: "U_g =  m \\cdto g \\cdot y",
+            factors: [
+                {
+                    lx: "U_g", sy: "U_g"
+                },
+                {
+                    lx: "m", sy: "m"
+                },
+                {
+                    lx: "g", sy: "g"
+                },
+                {
+                    lx: "y", sy: "y"
+                },],
+            variables: ["m", "g", "y"],
+            },
+            {
+            sympy: "Eq(U_e, k*x**2/2)",
+            latex: "U_e =  \\frac{1}{2} \\cdot k \\cdot x^2",
+            factors: [
+                {
+                    lx: "U_e", sy: "U_e"
+                },
+                {
+                    lx: "k", sy: "k"
+                },
+                {
+                    lx: "x", sy: "x"
+                },],
+            variables: ["k", "x"],
+            },
+            {
+            sympy: "Eq(E, K+U)",
+            latex: "E = K + U",
+            factors: [
+                {
+                    lx: "E", sy: "E"
+                },
+                {
+                    lx: "K", sy: "K"
+                },
+                {
+                    lx: "U", sy: "U"
+                },],
+            variables: ["K", "U"],
+            },
+            {
+            sympy: "Eq(m*v_i**2/2+m*g*y_i, m*v_f**2/2+m*g*y_f)",
+            latex: "\\frac{1}{2} \\cdot m \\cdot v_i^2 + m \\cdot \\cdot g \\cdot y_i = \\frac{1}{2} \\cdot m \\cdot v_f^2 + m \\cdot \\cdot g \\cdot y_f",
+            factors: [
+                {
+                    lx: "\\frac{1}{2} \\cdot m \\cdot v_i^2", sy: "m*v_i**2/2"
+                },
+                {
+                    lx: "m \\cdot \\cdot g \\cdot y_i", sy: "m*g*y_i"
+                },
+                {
+                    lx: "\\frac{1}{2} \\cdot m \\cdot v_f^2", sy: "m*v_f**2/2"
+                }, 
+                {
+                    lx: "m \\cdot \\cdot g \\cdot y_f", sy: "m*g*y_f"
+                },
+                {
+                    lx: "m", sy: "m"
+                },
+                {
+                    lx: "g", sy: "g"
+                },
+                {
+                    lx: "v_i", sy: "v_i"
+                },
+                {
+                    lx: "v_f", sy: "v_f"
+                },
+                {
+                    lx: "y_i", sy: "y_i"
+                },
+                {
+                    lx: "y_f", sy: "y_f"
+                },],
+                variables: ["g", "v_i", "v_f", "y_i", "y_i"],
+            },
+            {
+                sympy: "Eq(m*v_e**2/2 - G*M*m/R, 0)",
+            latex: "\\frac{1}{2} \\cdot m \\cdot v_e^2 - \\frac{G \\cdot M \\cdot m}{R} = 0",
+            factors: [
+                {
+                    lx: "\\frac{1}{2} \\cdot m \\cdot v_e^2", sy: "m*v_e**2/2"
+                },
+                {
+                    lx: "\\frac{G \\cdot M \\cdot m}{R}", sy: "G*M*m/R"
+                },
+                {
+                    lx: "m", sy: "m"
+                },
+                {
+                    lx: "M", sy: "M"
+                },
+                {
+                    lx: "G", sy: "G"
+                },
+                {
+                    lx: "R", sy: "R"
+                },
+                {
+                    lx: "v_e", sy: "v_e"
+                },],
+            variables: ["v_e", "R"],
+            },
+        ]
+        },
+        
+        
         {
             name: "Electromagnetismo",
             equations: [
