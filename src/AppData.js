@@ -237,6 +237,88 @@ const AppData = {
                 },
             ],
         },
+
+        {
+            name: "Impulso y cantidad de movimiento",
+            equations: [
+                {
+                    sympy: "Eq(p, m * v)",
+                    latex: "P = m \\cdot v",
+                    factors: [{
+                        lx: "p", sy: "p"
+                    },
+                    {
+                        lx: "m", sy: "m"
+                    },
+                    {
+                        lx: "v", sy: "v"
+                    }],
+                    variables: ["m", "v"],
+                },
+                {
+                    sympy: "Eq(I, F * t)",
+                    latex: "I = f \\cdot t",
+                    factors: [{
+                        lx: "I", sy: "I"
+                    },
+                    {
+                        lx: "F", sy: "F"
+                    },
+                    {
+                        lx: "t", sy: "t"
+                    }],
+                    variables: ["F", "t"],
+                },
+                {
+                    sympy: "Eq(I, p_f - p_i)",
+                    latex: "I = p_f - p_i",
+                    factors: [{
+                        lx: "I", sy: "I"
+                    },
+                    {
+                        lx: "p_f", sy: "p_f"
+                    },
+                    {
+                        lx: "p_i", sy: "p_i"
+                    }],
+                    variables: ["p_f", "p_i"],
+                },
+                {
+                    sympy: "Eq(F*t, m*v_f - m*v_i)",
+                    latex: "F*t = m \\cdot v_f - m \\cdot v_i",
+                    factors: [{
+                        lx: "F \\cdot t", sy: "F*t"
+                    },
+                    {
+                        lx: "m \\cdot v_f", sy: "m*v_f"
+                    },
+                    {
+                        lx: "m \\cdot v_i", sy: "m*v_i"
+                    },
+                    {
+                        lx: "F", sy: "F"
+                    },
+                    {
+                        lx: "t", sy: "t"
+                    },
+                    {
+                        lx: "m", sy: "m"
+                    },
+                    {
+                        lx: "v_f", sy: "v_f"
+                    },
+                    {
+                        lx: "v_i", sy: "v_i"
+                    },
+                    {
+                        lx: "v_f - v_i", sy: "v_f - v_i"
+                    }],
+                    variables: ["v_f", "v_i", "m", "F", "t"],
+                },
+                
+
+            ]
+        }
         {
             name: "Gravitación",
             equations: [
@@ -540,7 +622,7 @@ const AppData = {
             ],
         },
         {
-            name: 'Relatividad'
+            name: 'Relatividad',
             equations: [
                 {
                     sympy: "Eq(E, m*c**2)",
