@@ -318,7 +318,56 @@ const AppData = {
                 
 
             ]
-        }
+        },
+
+        {
+            name: "Fluidos"
+            equations: [
+                {
+                    sympy: "Eq(P_1+ρ*v_1**2/2+ρ*g*y_1, P_2+ρ*v_2**2/2+ρ*g*y_2)",
+                    latex: "P_1 + \\frac{1}{2} \\cdot \\rho \\cdot v_i^2 + \\rho \\cdot g \\cdot y_i = P_2 + \\frac{1}{2} \\cdot \\rho \\cdot v_f^2 + \\rho \\cdot g \\cdot y_f",
+                    factors: [
+                        {
+                            lx: "\\frac{1}{2} \\cdot \\rho \\cdot v_1^2", sy: "ρ*v_1**2/2"
+                        },
+                        {
+                            lx: "\\rho \\cdot g \\cdot y_1", sy: "ρ*g*y_1"
+                        },
+                        {
+                            lx: "\\frac{1}{2} \\cdot \\rho \\cdot v_2^2", sy: "ρ*v_2**2/2"
+                        },
+                        {
+                            lx: "\\rho \\cdot g \\cdot y_2", sy: "ρ*g*y_2"
+                        },
+                        {
+                            lx: "\\rho", sy: "ρ"
+                        },
+                        {
+                            lx: "g", sy: "g"
+                        },
+                        {
+                            lx: "v_1", sy: "v_1"
+                        },
+                        {
+                            lx: "v_2", sy: "v_2"
+                        },
+                        {
+                            lx: "y_1", sy: "y_1"
+                        },
+                        {
+                            lx: "y_2", sy: "y_2"
+                        },
+                        {
+                            lx: "P_1", sy: "P_1"
+                        },
+                        {
+                            lx: "P_2", sy: "P_2"
+                        },],
+                    variables: ["g", "v_1", "v_2", "y_1", "y_2", "ρ", "P_1", "P_2"],
+                },
+
+            ]
+        },
         {
             name: "Gravitación",
             equations: [
