@@ -298,7 +298,7 @@ const AppData = {
         equations:[
             {
             sympy: "Eq(K, m*v**2/2)",
-            latex: "K = \\frac{1}{2} m \\cdot v^2",
+            latex: "K = \\frac{1}{2} \\cdot m \\cdot v^2",
             factors: [
                 {
                     lx: "K", sy: "K"
@@ -361,19 +361,19 @@ const AppData = {
             },
             {
             sympy: "Eq(m*v_i**2/2+m*g*y_i, m*v_f**2/2+m*g*y_f)",
-            latex: "\\frac{1}{2} \\cdot m \\cdot v_i^2 + m \\cdot \\cdot g \\cdot y_i = \\frac{1}{2} \\cdot m \\cdot v_f^2 + m \\cdot \\cdot g \\cdot y_f",
+            latex: "\\frac{1}{2} \\cdot m \\cdot v_i^2 + m \\cdot g \\cdot y_i = \\frac{1}{2} \\cdot m \\cdot v_f^2 + m \\cdot g \\cdot y_f",
             factors: [
                 {
                     lx: "\\frac{1}{2} \\cdot m \\cdot v_i^2", sy: "m*v_i**2/2"
                 },
                 {
-                    lx: "m \\cdot \\cdot g \\cdot y_i", sy: "m*g*y_i"
+                    lx: "m \\cdot g \\cdot y_i", sy: "m*g*y_i"
                 },
                 {
                     lx: "\\frac{1}{2} \\cdot m \\cdot v_f^2", sy: "m*v_f**2/2"
                 }, 
                 {
-                    lx: "m \\cdot \\cdot g \\cdot y_f", sy: "m*g*y_f"
+                    lx: "m \\cdot g \\cdot y_f", sy: "m*g*y_f"
                 },
                 {
                     lx: "m", sy: "m"
