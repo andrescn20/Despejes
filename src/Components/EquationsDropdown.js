@@ -55,7 +55,7 @@ const EquationsDropdown = ({
     <div className="absolute z-40 md:relative md:h-full md:w-96 w-full">
       <button
         onClick={dropdown}
-        className={`text-dark_1 font-main font-bold bg-dark_green hover:text-white w-full py-2 flex px-12 items-center justify-center rounded-none ${
+        className={`text-dark_1 font-main font-bold bg-dark_green hover:text-white w-full py-2 flex px-12 items-center xl:rounded-lg justify-center rounded-none ${
           toggleMenu ? "md:rounded-tr-lg" : "md:rounded-r-lg"
         }`}
       >
