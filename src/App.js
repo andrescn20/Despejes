@@ -26,6 +26,22 @@ function App() {
     setActiveMode('free');
   };
 
+  useEffect(() => {
+    fetch(`https://projectnewtonapi.andrescn20.com/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+            })
+      .catch((error) => {
+        console.log(error);   
+      });
+  }, [])
+
   const displayActiveMode = () => {
     if (activeMode == 'free') {
       return (
