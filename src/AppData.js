@@ -465,7 +465,9 @@ const AppData = {
                         },
                         {
                             lx: "T", sy: "T"
-                        }
+                        },
+                        {   lx: "\\pi", sy: "pi"
+                        },
                     ],
                     variables: ["G", "M", "r", "T"], //v no es una variable, ¡Porque ya está despejada!
                 },
