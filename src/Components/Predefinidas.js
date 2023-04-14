@@ -185,7 +185,7 @@ export default function Libre({toggleLoading}) {
   // COMPONENT RETURN STATEMENT
   return (
     <div className="flex flex-col md:flex-row grow items-start gap-12 max-w-7xl mx-auto">
-      <EquationsDropdown toggleMenu={toggleMenu} dropdown={dropdown} equationList={equationList} updateHistory={updateHistory}/>
+      <EquationsDropdown toggleMenu={toggleMenu} dropdown={dropdown} equationList={equationList} updateHistory={updateHistory} setCurrentFactor={setCurrentFactor}/>
       {/* INPUT FIELD AND HELPERS */}
       <div className="flex flex-col md:grow md:mt-0 mt-12 w-full">
           <div className="grid grid-cols-[1fr_minmax(300px,600px)_1fr] mr-4 ">

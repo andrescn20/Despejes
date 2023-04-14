@@ -6,6 +6,7 @@ const EquationsDropdown = ({
   toggleMenu,
   equationList,
   updateHistory,
+  setCurrentFactor,
 }) => {
   const dropdownArrow = () => {
     if (!toggleMenu) {
@@ -47,12 +48,12 @@ const EquationsDropdown = ({
 
   const displayCategories = equationList.map((cat) => {
     return (
-        <Category equations={cat.equations} updateHistory={updateHistory} cat={cat} dropdown={dropdown}/>
+        <Category equations={cat.equations} updateHistory={updateHistory} cat={cat} dropdown={dropdown} setCurrentFactor={setCurrentFactor}/>
     );
   });
 
   return (
-    <div className="absolute z-40 md:relative md:h-full md:w-96 w-full">
+    <div className="absolute z-40 md:relative md:h-full md:max-w-[360px] w-full">
       <button
         onClick={dropdown}
         className={`text-dark_1 font-main font-bold bg-dark_green hover:text-white w-full py-2 flex px-12 items-center justify-center rounded-none ${
@@ -63,7 +64,6 @@ const EquationsDropdown = ({
         {dropdownArrow()}
       </button>
       <div
-        id="dropdown"
         className={`w-full rounded-b-lg ${
           toggleMenu ? "flex flex-col" : "hidden"
         }`}
