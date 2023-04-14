@@ -23,7 +23,6 @@ export default function Operation({
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         toggleLoading(false);
         updateEquation(data.latex, data.sympy);
       })
