@@ -285,7 +285,7 @@ const AppData = {
                 },
                 {
                     sympy: "Eq(F*t, m*v_f - m*v_i)",
-                    latex: "F*t = m \\cdot v_f - m \\cdot v_i",
+                    latex: "F\\cdot t = m \\cdot v_f - m \\cdot v_i",
                     factors: [{
                         lx: "F \\cdot t", sy: "F*t"
                     },
@@ -321,7 +321,7 @@ const AppData = {
         },
 
         {
-            name: "Fluidos"
+            name: "Fluidos",
             equations: [
                 {
                     sympy: "Eq(P_1+ρ*v_1**2/2+ρ*g*y_1, P_2+ρ*v_2**2/2+ρ*g*y_2)",
@@ -494,7 +494,7 @@ const AppData = {
                 },
                 {
                     sympy: "Eq(U_g, m*g*y)",
-                    latex: "U_g =  m \\cdto g \\cdot y",
+                    latex: "U_g =  m \\cdot g \\cdot y",
                     factors: [
                         {
                             lx: "U_g", sy: "U_g"
