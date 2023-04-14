@@ -147,7 +147,7 @@ export default function Libre({toggleLoading}) {
       value={number}
         className={`text-light font-numbers
     border-[1px] rounded-md mx-2 my-1 py-1 md:py-2 sm:w-16 hover:scale-105 flex items-center justify-center ${
-      number == currentFactor ? "bg-green text-black" : ""} ${currentFactor === null ? 'disabled' : ''}`}
+      number == currentFactor ? "bg-green text-black" : ""}`}
       >
         {number}
       </button>
