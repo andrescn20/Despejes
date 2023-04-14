@@ -24,7 +24,7 @@ const Category = ({
       dropdown();
     }
     updateHistory(equation);
-    setCurrentFactor("NA");
+    setCurrentFactor(null);
   };
   const category = equations.map((equation, i) => {
     return (

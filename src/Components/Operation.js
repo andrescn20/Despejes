@@ -40,7 +40,9 @@ export default function Operation({
       <div className="">
         <button
           type="submit"
-          className="bg-dark_2 flex justify-center items-center hover:scale-105 text-light font-numbers rounded-lg w-20 h-8 mx-2 py-1 shadow-sm shadow-gray-500 self-center  my-1 active:activeFactor"
+          className={`bg-dark_2 flex justify-center items-center hover:scale-105 text-light font-numbers rounded-lg w-20 h-8 mx-2 py-1 shadow-sm shadow-gray-500 self-center  my-1 active:activeFactor
+          ${factor === null ? "bg-gray-500 hover:scale-100" : ''}`}
+          disabled={factor === null}
         >
           {symbol}
         </button>
