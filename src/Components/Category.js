@@ -3,22 +3,29 @@ import { useState } from "react";
 import { InlineMath } from "react-katex";
 import useViewport from "../Hooks/Width";
 
-const Category = ({ equations, updateHistory, cat, dropdown }) => {
+const Category = ({
+  equations,
+  updateHistory,
+  cat,
+  dropdown,
+  setCurrentFactor,
+}) => {
   const [isCatOpen, setIsCatOpen] = useState(false);
 
   const toggleCategory = () => {
     setIsCatOpen(!isCatOpen);
   };
 
-  let width = useViewport()
+  let width = useViewport();
 
   const equationClick = (equation) => {
-    if(width.width < 768){
-      toggleCategory()
-      dropdown()
+    if (width.width < 768) {
+      toggleCategory();
+      dropdown();
     }
     updateHistory(equation);
-  }
+    setCurrentFactor("NA");
+  };
   const category = equations.map((equation, i) => {
     return (
       <li key={equation.latex} className={`${isCatOpen ? "" : "hidden"}`}>
@@ -78,7 +85,7 @@ const Category = ({ equations, updateHistory, cat, dropdown }) => {
         className="bg-light_green flex text-dark_1 font-main py-2 px-6 font-semibold w-full justify-between items-center"
         onClick={toggleCategory}
       >
-        <span>{cat.name}</span>
+        <p className="text-left">{cat.name}</p>
         <span>{dropdownArrow()}</span>
       </button>
       <ul className="text-sm bg-red-400">{category}</ul>
