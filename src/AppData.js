@@ -51,10 +51,6 @@ const AppData = {
               sy: "d",
             },
             {
-              lx: "2",
-              sy: "2",
-            },
-            {
               lx: "v_f^2",
               sy: "v_f**2",
             },
@@ -87,10 +83,6 @@ const AppData = {
               sy: "t",
             },
             {
-              lx: "2",
-              sy: "2",
-            },
-            {
               lx: "v_i \\cdot t",
               sy: "v_i * t",
             },
@@ -120,10 +112,6 @@ const AppData = {
             {
               lx: "t",
               sy: "t",
-            },
-            {
-              lx: "2",
-              sy: "2",
             },
             {
               lx: "(v_f + v_i)",
@@ -182,10 +170,6 @@ const AppData = {
               sy: "(y_f-y_i)",
             },
             {
-              lx: "2",
-              sy: "2",
-            },
-            {
               lx: "v_f^2",
               sy: "v_f**2",
             },
@@ -227,10 +211,6 @@ const AppData = {
             {
               lx: "t",
               sy: "t",
-            },
-            {
-              lx: "2",
-              sy: "2",
             },
             {
               lx: "v_i \\cdot t",
