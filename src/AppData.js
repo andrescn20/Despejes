@@ -228,7 +228,7 @@ const AppData = {
             equations: [
                 {
                     sympy: "Eq(p, m * v)",
-                    latex: "P = m \\cdot v",
+                    latex: "p = m \\cdot v",
                     factors: [{
                         lx: "p", sy: "p"
                     },
