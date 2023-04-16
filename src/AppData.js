@@ -465,7 +465,7 @@ const AppData = {
       name: "Dinámica",
       equations: [
         {
-            name: "Fluidos"
+            name: "Fluidos",
             equations: [
                 {
                     sympy: "Eq(P_1+ρ*v_1**2/2+ρ*g*y_1, P_2+ρ*v_2**2/2+ρ*g*y_2)",
