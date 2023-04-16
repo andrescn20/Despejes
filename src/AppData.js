@@ -4,175 +4,19 @@
 //No se incluye como variable aquellas que ya están despejadas
 
 const AppData = {
-    equationsList: [
+  equationsList: [
+    {
+      name: "Cinemática",
+      equations: [
         {
-            name: "Cinemática",
-            equations: [
-                {
-                    sympy: "Eq(v, d/t)",
-                    latex: "v=\\frac{d}{t}",
-                    factors: [{ lx: "v", sy: "v" }, { lx: "d", sy: "d" }, { lx: "t", sy: "t" }],
-                    variables: ["d", "t"], //v no es una variable, ¡Porque ya está despejada!
-                },
-                {
-                    sympy: "Eq(a, (v_f-v_i)/t)",
-                    latex: "a=\\frac{v_f-v_i}{t}",
-                    factors: [{ lx: "a", sy: "a" }, { lx: "v_f", sy: "v_f" }, { lx: "v_i", sy: "v_i" }, { lx: "t", sy: "t" }, { lx: "a \\cdot t", sy: "a * t" }],
-                    variables: ["v_f", "v_i", "t"],
-                },
-                {
-                    sympy: "Eq(v_f**2, v_i**2 + 2 * a * d)",
-                    latex: "v_f^2=v_i^2 + 2 \\cdot a \\cdot d",
-                    factors: [
-                        {
-                            lx: "a", sy: "a"
-                        },
-                        {
-                            lx: "v_f", sy: "v_f"
-                        },
-                        {
-                            lx: "v_i", sy: "v_i"
-                        },
-                        {
-                            lx: "d", sy: "d"
-                        },
-                        {
-                            lx: "v_f^2", sy: "v_f**2"
-                        },
-                        {
-                            lx: "v_i^2", sy: "v_i**2"
-                        },
-                        { lx: "a \\cdot d", sy: "a * d" }
-                    ],
-                    variables: ["a", "v_f", "v_i", "d"],
-                },
-                {
-                    sympy: "Eq(d, v_i*t+a*t**2/2)",
-                    latex: "d=v_i\\cdot t+a\\cdot \\frac{t^2}{2}",
-                    factors: [
-                        {
-                            lx: "d", sy: "d"
-                        },
-                        {
-                            lx: "v_i", sy: "v_i"
-                        },
-                        {
-                            lx: "a", sy: "a"
-                        },
-                        {
-                            lx: "t", sy: "t"
-                        },
-                        {
-                            lx: "v_i \\cdot t", sy: "v_i * t"
-                        },
-                        {
-                            lx: "\\frac{at^2}{2}", sy: "a*t**2/2"
-                        },
-                    ],
-                    variables: ["v_i", "a", "t"],
-                },
-                {
-                    sympy: "Eq(d, (v_f+v_i)*\\frac{t}{2})",
-                    latex: "d=(v_f+v_i)\\cdot \\frac{t}{2}",
-                    factors: [
-                        {
-                            lx: "d", sy: "d"
-                        },
-                        {
-                            lx: "v_i", sy: "v_i"
-                        },
-                        {
-                            lx: "v_f", sy: "v_f"
-                        },
-                        {
-                            lx: "t", sy: "t"
-                        },
-                        {
-                            lx: "(v_f + v_i)", sy: "v_f + v_i"
-                        },
-                        {
-                            lx: "(v_f + v_i) \\cdot \\frac{t}{2}", sy: "(v_f + v_i) * t/2"
-                        }
-                    ],
-                    variables: ["v_i", "v_f", "t"],
-                },
-            ],
-        },
-        {
-            name: "Caída libre",
-            equations: [
-                {
-                    sympy: "Eq(v_f, v_i - g*t)",
-                    latex: "v_f = v_i - g \\cdot t",
-                    factors: [{ lx: "g", sy: "g" }, { lx: "v_f", sy: "v_f" }, { lx: "v_i", sy: "v_i" }, { lx: "t", sy: "t" }, { lx: "g \\cdot t", sy: "g * t" }],
-                    variables: ["g", "v_i", "t"],
-                },
-                {
-                    sympy: "Eq(v_f**2, v_i**2 - 2 * g * (y_f - y_i))",
-                    latex: "v_f^2=v_i^2 - 2 \\cdot g \\cdot d",
-                    factors: [
-                        {
-                            lx: "g", sy: "g"
-                        },
-                        {
-                            lx: "v_f", sy: "v_f"
-                        },
-                        {
-                            lx: "v_i", sy: "v_i"
-                        },
-                        {
-                            lx: "y_f", sy: "y_f"
-                        },
-                        {
-                            lx: "y_i", sy: "y_i"
-                        },
-                        {
-                            lx: "(y_f-y_i)", sy: "(y_f-y_i)"
-                        },
-                        {
-                            lx: "v_f^2", sy: "v_f**2"
-                        },
-                        {
-                            lx: "v_i^2", sy: "v_i**2"
-                        },
-                        {
-                            lx: "g \\cdot d", sy: "g*d"
-                        }
-                    ],
-                    variables: ["g", "v_f", "v_i", "y_f", "y_i"],
-                },
-                {
-                    sympy: "Eq(y_f - y_i, v_i*t-g*t**2/2)",
-                    latex: "y_f - y_i=v_i \\cdot t - \\frac{g\\cdot t^2}{2}",
-                    factors: [
-                        {
-                            lx: "y_f", sy: "y_f"
-                        },
-                        {
-                            lx: "y_i", sy: "y_i"
-                        },
-                        {
-                            lx: "(y_f - y_i)", sy: "(y_f-y_i)"
-                        },
-                        {
-                            lx: "v_i", sy: "v_i"
-                        },
-                        {
-                            lx: "g", sy: "g"
-                        },
-                        {
-                            lx: "t", sy: "t"
-                        },
-                        {
-                            lx: "v_i \\cdot t", sy: "v_i*t"
-                        },
-                        {
-                            lx: "g \\cdot \\frac{t^2}{2}", sy: "g * t**2/2"
-                        }
-                    ],
-                    variables: ["v_i", "g", "t", "2", "y_f", "y_i"],
-                },
-            ],
+          sympy: "Eq(v, d/t)",
+          latex: "v=\\frac{d}{t}",
+          factors: [
+            { lx: "v", sy: "v" },
+            { lx: "d", sy: "d" },
+            { lx: "t", sy: "t" },
+          ],
+          variables: ["d", "t"], //v no es una variable, ¡Porque ya está despejada!
         },
         {
           sympy: "Eq(a, (v_f-v_i)/t)",
@@ -187,85 +31,6 @@ const AppData = {
           variables: ["v_f", "v_i", "t"],
         },
         {
-            name: "Impulso y cantidad de movimiento",
-            equations: [
-                {
-                    sympy: "Eq(p, m * v)",
-                    latex: "p = m \\cdot v",
-                    factors: [{
-                        lx: "p", sy: "p"
-                    },
-                    {
-                        lx: "m", sy: "m"
-                    },
-                    {
-                        lx: "v", sy: "v"
-                    }],
-                    variables: ["m", "v"],
-                },
-                {
-                    sympy: "Eq(I, F * t)",
-                    latex: "I = f \\cdot t",
-                    factors: [{
-                        lx: "I", sy: "I"
-                    },
-                    {
-                        lx: "F", sy: "F"
-                    },
-                    {
-                        lx: "t", sy: "t"
-                    }],
-                    variables: ["F", "t"],
-                },
-                {
-                    sympy: "Eq(I, p_f - p_i)",
-                    latex: "I = p_f - p_i",
-                    factors: [{
-                        lx: "I", sy: "I"
-                    },
-                    {
-                        lx: "p_f", sy: "p_f"
-                    },
-                    {
-                        lx: "p_i", sy: "p_i"
-                    }],
-                    variables: ["p_f", "p_i"],
-                },
-                {
-                    sympy: "Eq(F*t, m*v_f - m*v_i)",
-                    latex: "F*t = m \\cdot v_f - m \\cdot v_i",
-                    factors: [{
-                        lx: "F \\cdot t", sy: "F*t"
-                    },
-                    {
-                        lx: "m \\cdot v_f", sy: "m*v_f"
-                    },
-                    {
-                        lx: "m \\cdot v_i", sy: "m*v_i"
-                    },
-                    {
-                        lx: "F", sy: "F"
-                    },
-                    {
-                        lx: "t", sy: "t"
-                    },
-                    {
-                        lx: "m", sy: "m"
-                    },
-                    {
-                        lx: "v_f", sy: "v_f"
-                    },
-                    {
-                        lx: "v_i", sy: "v_i"
-                    },
-                    {
-                        lx: "v_f - v_i", sy: "v_f - v_i"
-                    }],
-                    variables: ["v_f", "v_i", "m", "F", "t"],
-                },
-                
-
-            ]
           sympy: "Eq(v_f**2, v_i**2 + 2 * a * d)",
           latex: "v_f^2=v_i^2 + 2 \\cdot a \\cdot d",
           factors: [
@@ -326,7 +91,7 @@ const AppData = {
               sy: "a*t**2/2",
             },
           ],
-          variables: ["v_i", "a", "t", "2"],
+          variables: ["v_i", "a", "t"],
         },
         {
           sympy: "Eq(d, (v_f+v_i)*\\frac{t}{2})",
@@ -465,57 +230,6 @@ const AppData = {
       name: "Dinámica",
       equations: [
         {
-            name: "Fluidos",
-            equations: [
-                {
-                    sympy: "Eq(P_1+ρ*v_1**2/2+ρ*g*y_1, P_2+ρ*v_2**2/2+ρ*g*y_2)",
-                    latex: "P_1 + \\frac{1}{2} \\cdot \\rho \\cdot v_1^2 + \\rho \\cdot g \\cdot y_1 = P_2 + \\frac{1}{2} \\cdot \\rho \\cdot v_2^2 + \\rho \\cdot g \\cdot y_2",
-                    factors: [
-                        {
-                            lx: "\\frac{1}{2} \\cdot \\rho \\cdot v_1^2", sy: "ρ*v_1**2/2"
-                        },
-                        {   
-                            lx: "\\frac{1}{2} \\cdot v_1^2 + g \\cdot y_1 - \\frac{1}{2} \\cdot v_2^2 - g \\cdot y_2", sy: "v_1**2/2+g*y_1-v_2**2/2-g*y_2"
-                        },
-                        {
-                            lx: "P_1-P_2", sy: "P_1-P_2"
-                        },
-        
-                        {
-                            lx: "\\rho \\cdot g \\cdot y_1", sy: "ρ*g*y_1"
-                        },
-                        {
-                            lx: "\\frac{1}{2} \\cdot \\rho \\cdot v_2^2", sy: "ρ*v_2**2/2"
-                        },
-                        {
-                            lx: "\\rho \\cdot g \\cdot y_2", sy: "ρ*g*y_2"
-                        },
-                        {
-                            lx: "\\rho", sy: "ρ"
-                        },
-                        {
-                            lx: "g", sy: "g"
-                        },
-                        {
-                            lx: "v_1", sy: "v_1"
-                        },
-                        {
-                            lx: "v_2", sy: "v_2"
-                        },
-                        {
-                            lx: "y_1", sy: "y_1"
-                        },
-                        {
-                            lx: "y_2", sy: "y_2"
-                        },
-                        {
-                            lx: "P_1", sy: "P_1"
-                        },
-                        {
-                            lx: "P_2", sy: "P_2"
-                        },],
-                    variables: ["g", "v_1", "v_2", "y_1", "y_2", "ρ", "P_1", "P_2"],
-                },
           sympy: "Eq(F, m * a)",
           latex: "F = m \\cdot a",
           factors: [
