@@ -44,7 +44,9 @@ export default function Operation({
           ${factor === null ? "bg-gray-500 hover:scale-100" : ''}`}
           disabled={factor === null}
         >
-          {symbol}
+         <span className="w-6 h-6 flex justify-center items-center">
+           {symbol}
+          </span>
         </button>
       </div>
     </form>
