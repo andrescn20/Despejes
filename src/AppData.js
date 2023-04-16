@@ -37,9 +37,6 @@ const AppData = {
                             lx: "d", sy: "d"
                         },
                         {
-                            lx: "2", sy: "2"
-                        },
-                        {
                             lx: "v_f^2", sy: "v_f**2"
                         },
                         {
@@ -66,16 +63,13 @@ const AppData = {
                             lx: "t", sy: "t"
                         },
                         {
-                            lx: "2", sy: "2"
-                        },
-                        {
                             lx: "v_i \\cdot t", sy: "v_i * t"
                         },
                         {
                             lx: "\\frac{at^2}{2}", sy: "a*t**2/2"
                         },
                     ],
-                    variables: ["v_i", "a", "t", "2"],
+                    variables: ["v_i", "a", "t"],
                 },
                 {
                     sympy: "Eq(d, (v_f+v_i)*\\frac{t}{2})",
@@ -92,9 +86,6 @@ const AppData = {
                         },
                         {
                             lx: "t", sy: "t"
-                        },
-                        {
-                            lx: "2", sy: "2"
                         },
                         {
                             lx: "(v_f + v_i)", sy: "v_f + v_i"
@@ -139,9 +130,6 @@ const AppData = {
                             lx: "(y_f-y_i)", sy: "(y_f-y_i)"
                         },
                         {
-                            lx: "2", sy: "2"
-                        },
-                        {
                             lx: "v_f^2", sy: "v_f**2"
                         },
                         {
@@ -174,9 +162,6 @@ const AppData = {
                         },
                         {
                             lx: "t", sy: "t"
-                        },
-                        {
-                            lx: "2", sy: "2"
                         },
                         {
                             lx: "v_i \\cdot t", sy: "v_i*t"
@@ -325,11 +310,18 @@ const AppData = {
             equations: [
                 {
                     sympy: "Eq(P_1+ρ*v_1**2/2+ρ*g*y_1, P_2+ρ*v_2**2/2+ρ*g*y_2)",
-                    latex: "P_1 + \\frac{1}{2} \\cdot \\rho \\cdot v_i^2 + \\rho \\cdot g \\cdot y_i = P_2 + \\frac{1}{2} \\cdot \\rho \\cdot v_f^2 + \\rho \\cdot g \\cdot y_f",
+                    latex: "P_1 + \\frac{1}{2} \\cdot \\rho \\cdot v_1^2 + \\rho \\cdot g \\cdot y_1 = P_2 + \\frac{1}{2} \\cdot \\rho \\cdot v_2^2 + \\rho \\cdot g \\cdot y_2",
                     factors: [
                         {
                             lx: "\\frac{1}{2} \\cdot \\rho \\cdot v_1^2", sy: "ρ*v_1**2/2"
                         },
+                        {   
+                            lx: "\\frac{1}{2} \\cdot v_1^2 + g \\cdot y_1 - \\frac{1}{2} \\cdot v_2^2 - g \\cdot y_2", sy: "v_1**2/2+g*y_1-v_2**2/2-g*y_2"
+                        },
+                        {
+                            lx: "P_1-P_2", sy: "P_1-P_2"
+                        },
+        
                         {
                             lx: "\\rho \\cdot g \\cdot y_1", sy: "ρ*g*y_1"
                         },
