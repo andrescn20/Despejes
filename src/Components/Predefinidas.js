@@ -328,6 +328,7 @@ export default function Predefinidas({ toggleLoading, run, setRun }) {
 
   const restartTutorial = () => {
     setStepIndex(0);
+    setToggleMenu(false);
     setRun(true);
   };
 
