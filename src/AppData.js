@@ -143,7 +143,7 @@ const AppData = {
         },
         {
           sympy: "Eq(v_f**2, v_i**2 - 2 * g * (y_f - y_i))",
-          latex: "v_f^2=v_i^2 - 2 \\cdot g \\cdot d",
+          latex: "v_f^2=v_i^2 - 2 \\cdot g \\cdot (y_f - y_i)",
           factors: [
             {
               lx: "g",
@@ -178,8 +178,8 @@ const AppData = {
               sy: "v_i**2",
             },
             {
-              lx: "g \\cdot d",
-              sy: "g*d",
+              lx: "g \\cdot (y_f-y_i)",
+              sy: "g* (y_f-y_i)",
             },
           ],
           variables: ["g", "v_f", "v_i", "y_f", "y_i"],
