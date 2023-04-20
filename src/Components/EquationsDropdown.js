@@ -7,7 +7,17 @@ const EquationsDropdown = ({
   equationList,
   updateHistory,
   setCurrentFactor,
+  stepIndex,
+  setStepIndex,
+  run
 }) => {
+
+  const handleEquationsDropdown = () => {
+    dropdown();
+      setStepIndex(1);
+
+  };
+
   const dropdownArrow = () => {
     if (!toggleMenu) {
       return (
@@ -48,15 +58,15 @@ const EquationsDropdown = ({
 
   const displayCategories = equationList.map((cat) => {
     return (
-        <Category equations={cat.equations} updateHistory={updateHistory} cat={cat} dropdown={dropdown} setCurrentFactor={setCurrentFactor}/>
+        <Category run={run} setStepIndex={setStepIndex} equations={cat.equations} updateHistory={updateHistory} cat={cat} dropdown={dropdown} setCurrentFactor={setCurrentFactor}/>
     );
   });
 
   return (
     <div className="absolute z-40 md:relative md:h-full md:max-w-[360px] w-full">
       <button
-        onClick={dropdown}
-        className={`text-dark_1 font-main font-bold bg-dark_green hover:text-white w-full py-2 flex px-12 items-center justify-center rounded-none ${
+                onClick={handleEquationsDropdown}
+        className={`equationsDropdown text-dark_1 font-main font-bold bg-dark_green hover:text-white w-full py-2 flex px-12 items-center justify-center rounded-none ${
           toggleMenu ? "md:rounded-tr-lg xl:rounded-t-lg " : "md:rounded-r-lg xl:rounded-lg "
         }`}
       >

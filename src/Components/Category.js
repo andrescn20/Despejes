@@ -9,16 +9,24 @@ const Category = ({
   cat,
   dropdown,
   setCurrentFactor,
+  setStepIndex,
+  run
 }) => {
   const [isCatOpen, setIsCatOpen] = useState(false);
 
-  const toggleCategory = () => {
+  const toggleCategory = (name) => {
+      if(name === "Cinemática"){
+        setStepIndex(2);
+      }
     setIsCatOpen(!isCatOpen);
   };
 
   let width = useViewport();
 
-  const equationClick = (equation) => {
+  const equationClick = (equation, i) => {
+    if (i === 2) {
+      setStepIndex(3);
+    }
     if (width.width < 768) {
       toggleCategory();
       dropdown();
@@ -28,9 +36,14 @@ const Category = ({
   };
   const category = equations.map((equation, i) => {
     return (
-      <li key={equation.latex} className={`${isCatOpen ? "" : "hidden"}`}>
+      <li
+        key={equation.latex}
+        className={`${isCatOpen ? "" : "hidden"} ${
+          i === 2 ? "equationBtn" : ""
+        }`}
+      >
         <button
-          onClick={() => equationClick(equation)}
+          onClick={() => equationClick(equation, i)}
           className={`w-full px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
             i % 2 == 0 ? "bg-neutral-200" : "bg-white"
           }`}
@@ -80,10 +93,10 @@ const Category = ({
   };
 
   return (
-    <div>
+    <div className="categoryBtn">
       <button
         className="bg-light_green flex text-dark_1 font-main py-2 px-6 font-semibold w-full justify-between items-center"
-        onClick={toggleCategory}
+        onClick={ () => toggleCategory(cat.name)}
       >
         <p className="text-left">{cat.name}</p>
         <span>{dropdownArrow()}</span>

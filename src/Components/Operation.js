@@ -7,9 +7,11 @@ export default function Operation({
   updateEquation,
   factor,
   symbol,
+  setStepIndex
 }) {
   const sympyCalculation = (e) => {
     e.preventDefault();
+    setStepIndex(5);
     toggleLoading(true);
     fetch(`https://projectnewtonapi.andrescn20.com/${name}`, {
       method: "POST",

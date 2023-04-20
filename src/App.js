@@ -4,10 +4,14 @@ import Predefinidas from "./Components/Predefinidas";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 
+
 function App() {
   //Modo: Predefinidas vs Libre
   const [activeMode, setActiveMode] = useState("classic");
   const [isLoading, setIsLoading] = useState(false);
+  const [showTutorialModal, setShowTutorialModal] = useState(true);
+  const [run, setRun] = useState(false);
+
 
   const selectClassic = () => {
     setActiveMode("classic");
@@ -45,7 +49,7 @@ function App() {
       );
     }
     if (activeMode == "classic") {
-      return <Predefinidas toggleLoading={toggleLoading} />;
+      return <Predefinidas toggleLoading={toggleLoading} run={run} setRun={setRun} />;
     }
   };
 
@@ -76,6 +80,32 @@ function App() {
       );
     }
   }
+  
+  const startTutorial = () => {
+    setShowTutorialModal(false);
+    setRun(true);
+    
+  };
+
+  function TutorialModal() {
+    if (showTutorialModal) {
+      return (
+        <div className="absolute h-full w-full bg-black/40 flex items-center justify-center z-50 flex-col">
+          <div className="flex flex-col items-center justify-center gap-4 bg-header border-2 rounded-lg max-w-4xl py-24 px-12 mx-12">
+            <div className="font-bold text-2xl text-light"> Bienvenido a Proyecto Newton</div>
+           <div className="text-light text-center">
+             Aquí podrás aprender a resolver ecuaciones con facilidad. Da click en el botón "Tutorial" si deseas un tour guiado por la aplicación o en 
+            "Empezar" si deseas saltarte el tutorial.
+            </div>
+          <div className="flex flex-col sm:flex-row">
+            <button onClick={startTutorial} className="bg-green text-header p-2 rounded-lg m-4 font-bold w-32">Tutorial</button>
+            <button onClick={() => setShowTutorialModal(false)} className="bg-green text-header p-2 rounded-lg m-4 font-bold w-32">Empezar</button>
+          </div>
+          </div>
+        </div>
+      );
+    }
+  }
 
   return (
     <div className="font-main flex flex-col min-h-screen bg-dark_1">
@@ -83,6 +113,7 @@ function App() {
         selectClassic={selectClassic}
         selectFree={selectFree}
         activeMode={activeMode}
+        setRun={setRun}
       />
       <div className="grow flex">{displayActiveMode()}</div>
 
@@ -94,6 +125,7 @@ function App() {
         /> */}
       <Footer />
       <LoadingModal isLoading={isLoading} />
+      <TutorialModal showTutorialModal={showTutorialModal} />
     </div>
   );
 }
