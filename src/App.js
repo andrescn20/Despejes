@@ -113,7 +113,6 @@ function App() {
         selectClassic={selectClassic}
         selectFree={selectFree}
         activeMode={activeMode}
-        setRun={setRun}
       />
       <div className="grow flex">{displayActiveMode()}</div>
 

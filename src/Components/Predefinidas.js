@@ -154,7 +154,7 @@ export default function Predefinidas({ toggleLoading, run, setRun }) {
         ¡Felicidades!
       </div>,
       content:
-        "Has completado el tutorial. Ahora puedes continuar con el despeje de la ecuación. Si deseas volver a ver el tutorial, haz click en el botón de ayuda de la esquina superior derecha.",
+        "Has completado el tutorial. Ahora puedes continuar con el despeje de la ecuación. Si deseas volver a ver el tutorial, haz click en el botón de ayuda (?)",
       placement: "bottom",
       spotlightClicks: false,
       disableBeacon: true,
@@ -326,9 +326,15 @@ export default function Predefinidas({ toggleLoading, run, setRun }) {
     }
   });
 
+  const restartTutorial = () => {
+    setStepIndex(0);
+    setRun(true);
+  };
+
   // COMPONENT RETURN STATEMENT
   return (
     <div className="flex flex-col md:flex-row grow items-start gap-12 max-w-7xl mx-auto">
+     
       <EquationsDropdown
         run={run}
         stepIndex={stepIndex}
@@ -341,6 +347,26 @@ export default function Predefinidas({ toggleLoading, run, setRun }) {
       />
       {/* INPUT FIELD AND HELPERS */}
       <div className="flex flex-col md:grow md:mt-0 mt-12 w-full">
+         <button
+            className="font-bold text-header mr-4 absolute"
+            onClick={() => restartTutorial()}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#79C1B0"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </button>
         <div className="grid grid-cols-[1fr_minmax(300px,600px)_1fr] mr-4 ">
           <div className="helperOperations mx-4 row-start-1 items-end col-start-2 flex relative z-20 translate-x-4 ">
             {HelperOperations}
@@ -430,7 +456,7 @@ export default function Predefinidas({ toggleLoading, run, setRun }) {
         run={run}
         debug={false}
         continuous={true}
-        hideCloseButton={true}
+        hideCloseButton={false}
         disableOverlayClose = {true}
         hideBackButton = {true}
         showProgress = {false}
