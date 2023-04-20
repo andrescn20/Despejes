@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { InlineMath } from "react-katex";
 
-const FactorBtn = ({ latexFactor, sympyFactor,  currentFactor, updateFactor }) => {
+const FactorBtn = ({ latexFactor, sympyFactor,  currentFactor, updateFactor, setStepIndex }) => {
 
     const triggerFactorUpdate = () => {
         updateFactor(sympyFactor);
+        setStepIndex(4)
     }
 
   return (
