@@ -1,3 +1,4 @@
+//imports section
 import React, { useEffect, useState } from "react";
 import Libre from "./Components/Libre";
 import Predefinidas from "./Components/Predefinidas";
@@ -12,7 +13,7 @@ function App() {
   const [showTutorialModal, setShowTutorialModal] = useState(true);
   const [run, setRun] = useState(false);
 
-
+  
   const selectClassic = () => {
     setActiveMode("classic");
   };
